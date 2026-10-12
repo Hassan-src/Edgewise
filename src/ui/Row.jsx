@@ -1,5 +1,20 @@
 import styled, { css } from "styled-components";
 
+const $gap = {
+  small: css`
+    gap: var(--space-2);
+  `,
+  medium: css`
+    gap: var(--space-4);
+  `,
+  large: css`
+    gap: var(--space-6);
+  `,
+  xlarge: css`
+    gap: var(--space-8);
+  `,
+};
+
 const Row = styled.div`
   display: flex;
 
@@ -13,8 +28,8 @@ const Row = styled.div`
     props.$type === "vertical" &&
     css`
       flex-direction: column;
-      gap: var(--space-6);
     `}
+  ${(props) => $gap[props.$gap]}
 `;
 
 export default Row;

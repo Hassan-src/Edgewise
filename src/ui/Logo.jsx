@@ -1,6 +1,5 @@
 import styled, { css } from "styled-components";
-import imageSide from "../../public/Logo-vertical-light.svg";
-import imageHead from "../../public/Logo-horizontal-light.svg";
+import imageSide from "/Logo-vertical-light.svg";
 
 const StyledLogo = styled.div`
   text-align: center;

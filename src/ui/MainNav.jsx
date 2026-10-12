@@ -67,37 +67,37 @@ function MainNav() {
         <li>
           <StyledNavList to="dashboard">
             <HiOutlineSquares2X2 />
-            Dashboard
+            <span>Dashboard</span>
           </StyledNavList>
         </li>
         <li>
           <StyledNavList to="trades">
             <HiOutlineListBullet />
-            Trades
+            <span>Trades</span>
           </StyledNavList>
         </li>
         <li>
           <StyledNavList to="daily-trades">
             <HiOutlineClock />
-            Daily Trades
+            <span>Daily Trades</span>
           </StyledNavList>
         </li>
         <li>
           <StyledNavList to="stats">
             <HiOutlineChartPie />
-            Stats
+            <span>Stats</span>
           </StyledNavList>
         </li>
         <li>
           <StyledNavList to="journal">
             <HiOutlineBookOpen />
-            Journal
+            <span>Journal</span>
           </StyledNavList>
         </li>
         <li>
           <StyledNavList to="settings">
             <HiOutlineCog6Tooth />
-            Settings
+            <span>Settings</span>
           </StyledNavList>
         </li>
       </NavList>

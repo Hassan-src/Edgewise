@@ -13,6 +13,9 @@ const StyledAppLayout = styled.div`
 const Main = styled.main`
   background-color: var(--color-bg);
   padding: var(--space-16) var(--space-12) var(--space-16);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
 `;
 
 function AppLayout() {
