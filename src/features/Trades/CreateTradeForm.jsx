@@ -6,8 +6,9 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addTrade } from "../../services/apiTrades";
 import toast from "react-hot-toast";
-import Styledselect from "../../ui/Select";
+import StyledSelect from "../../ui/Select";
 import FormRow from "../../ui/FormRow";
+import Loading from "../../ui/Loading";
 
 function CreateTradeForm() {
   // using react hook form library to manage the form
@@ -27,7 +28,6 @@ function CreateTradeForm() {
       toast.error(err.message);
     },
   });
-
   function onSubmit(data) {
     mutate(data);
   }
@@ -60,7 +60,7 @@ function CreateTradeForm() {
         />
       </FormRow>
       <FormRow label="direction" error={errors?.side?.message}>
-        <Styledselect
+        <StyledSelect
           {...register("side", {
             required: "Required field",
           })}
@@ -68,7 +68,7 @@ function CreateTradeForm() {
         >
           <option value="buy">buy</option>
           <option value="sell">sell</option>
-        </Styledselect>
+        </StyledSelect>
       </FormRow>
       <FormRow label="volume" error={errors?.volume?.message}>
         <Input

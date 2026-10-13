@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
 import { getTrades } from "../../services/apiTrades";
 import TradesRow from "./TradesRow";
+import Loading from "../../ui/Loading";
 
 const Table = styled.div`
   background-color: var(--color-surface);
@@ -32,7 +33,7 @@ function TradesTable() {
     queryKey: ["trades"],
     queryFn: getTrades,
   });
-  if (isLoading) return null;
+  if (isLoading) return <Loading />;
   return (
     <>
       <Table role="table">

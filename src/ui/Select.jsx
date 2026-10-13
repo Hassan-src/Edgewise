@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Styledselect = styled.select`
+const StyledSelect = styled.select`
   width: fit-content;
   font-size: var(--text-lg);
   font-weight: 500;
@@ -10,4 +10,4 @@ const Styledselect = styled.select`
   background-color: var(--color-surface-muted);
 `;
 
-export default Styledselect;
+export default StyledSelect;
