@@ -51,7 +51,7 @@ const GlobalStyles = createGlobalStyle`
   // Red
   --color-error: #BD1436;
   --color-error-hover: #8F0F29;
-  --color-error-border: #6A0B1E;
+  --color-error-dark: #6A0B1E;
 
   // Numberic colors
   --color-profit: #16845C;
@@ -115,6 +115,7 @@ const GlobalStyles = createGlobalStyle`
   font-size: var(--text-base);
   line-height: 1.5;
   transition: color 0.2s, background-color 0.2s;
+  overflow: hidden;
 }
 
   input,

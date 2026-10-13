@@ -12,8 +12,8 @@ const $sizes = {
     padding: var(--space-2) var(--space-3);
   `,
   large: css`
-    font-size: var(--text-xl);
-    font-weight: 500;
+    font-size: var(--text-lg);
+    font-weight: 600;
     padding: var(--space-3) var(--space-4);
   `,
 };
@@ -44,6 +44,7 @@ const $variations = {
 };
 
 const Button = styled.button`
+  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
