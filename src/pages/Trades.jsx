@@ -5,9 +5,11 @@ import Row from "../ui/Row";
 import Heading from "../ui/Heading";
 import { useState } from "react";
 import CreateTradeForm from "../features/Trades/CreateTradeForm";
+import ImportTrades from "../features/Trades/ImportTrades";
 
 function Trades() {
   const [showForm, setShowForm] = useState(false);
+  const [showImport, setShowImport] = useState(false);
 
   return (
     <>
@@ -28,6 +30,15 @@ function Trades() {
           Add trade
         </Button>
         {showForm && <CreateTradeForm />}
+        <Button
+          $size="large"
+          $variation="primary"
+          onClick={() => setShowImport((show) => !show)}
+        >
+          <HiOutlinePlus />
+          Import trades
+        </Button>
+        {showImport && <ImportTrades />}
       </Row>
     </>
   );

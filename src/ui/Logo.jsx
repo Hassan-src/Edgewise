@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import imageSide from "/Logo-vertical-light.svg";
+import imageSide from "/Logo-horizontal-light.svg";
 
 const StyledLogo = styled.div`
   text-align: center;
@@ -23,7 +23,7 @@ const Image = styled.img`
 function Logo() {
   return (
     <StyledLogo>
-      <Image src={imageSide} alt="" />
+      <Image fetchPriority="high" src={imageSide} alt="" />
     </StyledLogo>
   );
 }

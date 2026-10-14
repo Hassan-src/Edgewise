@@ -8,7 +8,6 @@ import { addTrade } from "../../services/apiTrades";
 import toast from "react-hot-toast";
 import StyledSelect from "../../ui/Select";
 import FormRow from "../../ui/FormRow";
-import Loading from "../../ui/Loading";
 
 function CreateTradeForm() {
   // using react hook form library to manage the form
@@ -16,7 +15,7 @@ function CreateTradeForm() {
   const { errors } = formState;
   // using query client to refetch the data from supabase
   const queryClient = useQueryClient();
-  // mutating the data and adding the new row
+  // mutating the data and adding new row
   const { isLoading: isCreating, mutate } = useMutation({
     mutationFn: addTrade,
     onSuccess: () => {
@@ -141,7 +140,7 @@ function CreateTradeForm() {
             required: "Required field",
             max: {
               value: 0,
-              message: "Value must be a negative number or 0",
+              message: "Commission must be a negative number or 0",
             },
           })}
         />
@@ -154,7 +153,13 @@ function CreateTradeForm() {
           step="0.01"
           defaultValue={0}
           disabled={isCreating}
-          {...register("swap", { required: "Required field" })}
+          {...register("swap", {
+            required: "Required field",
+            max: {
+              value: 0,
+              message: "Swap must be a negative number or 0",
+            },
+          })}
         />
       </FormRow>
       <FormRow label="fee" error={errors?.fee?.message}>
@@ -165,7 +170,13 @@ function CreateTradeForm() {
           defaultValue={0}
           step="0.01"
           disabled={isCreating}
-          {...register("fee", { required: "Required field" })}
+          {...register("fee", {
+            required: "Required field",
+            max: {
+              value: 0,
+              message: "Fee must be a negative number or 0",
+            },
+          })}
         />
       </FormRow>
       <FormRow label="profit" error={errors?.profit?.message}>
