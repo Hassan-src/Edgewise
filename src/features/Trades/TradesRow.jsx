@@ -1,10 +1,13 @@
-import styled, { css } from "styled-components";
-import MetricValue from "../../ui/MetricValue";
-import { HiOutlineTrash } from "react-icons/hi2";
-import Button from "../../ui/Buttons";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { deleteTrade } from "../../services/apiTrades";
 import toast from "react-hot-toast";
+import { useState } from "react";
+import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import styled, { css } from "styled-components";
+
+import Button from "../../ui/Buttons";
+import CreateTradeForm from "./CreateTradeForm";
+import MetricValue from "../../ui/MetricValue";
+import { deleteTrade } from "../../services/apiTrades";
 
 const $dir = {
   buy: css`
@@ -69,8 +72,12 @@ const Source = styled.div`
   border-radius: var(--radius-full);
   ${(props) => $src[props.$src]}
 `;
+const Action = styled.div`
+  width: fit-content;
+`;
 
 function TradesRow({ trade }) {
+  const [showForm, setShowForm] = useState(false);
   // destructuring the fetched data
   const { id, symbol, net_profit, open_time, source, side: direction } = trade;
   const date = open_time.slice(0, 10);
@@ -87,29 +94,42 @@ function TradesRow({ trade }) {
     onError: (err) => toast.error(err.message),
   });
   return (
-    <TableRow role="row">
-      <Date>{date}</Date>
-      <Symbol>{symbol}</Symbol>
-      <Direction $dir={direction === "buy" ? "buy" : "sell"}>
-        {direction}
-      </Direction>
-      <PL>
-        <MetricValue $status={net_profit > 0 ? "profit" : "loss"}>
-          {net_profit > 0 ? `+${net_profit}` : net_profit}
-        </MetricValue>
-      </PL>
-      <Source $src={source === "manual" ? "manual" : "imported"}>
-        {source}
-      </Source>
-      <Button
-        $variation="danger"
-        $size="small"
-        onClick={() => mutate(id)}
-        disabled={isDeleting}
-      >
-        <HiOutlineTrash />
-      </Button>
-    </TableRow>
+    <>
+      <TableRow role="row">
+        <Date>{date}</Date>
+        <Symbol>{symbol}</Symbol>
+        <Direction $dir={direction === "buy" ? "buy" : "sell"}>
+          {direction}
+        </Direction>
+        <PL>
+          <MetricValue $status={net_profit > 0 ? "profit" : "loss"}>
+            {net_profit > 0 ? `+${net_profit}` : net_profit}
+          </MetricValue>
+        </PL>
+        <Source $src={source === "manual" ? "manual" : "imported"}>
+          {source}
+        </Source>
+        <Action>
+          <Button
+            $variation="danger"
+            $size="small"
+            onClick={() => mutate(id)}
+            disabled={isDeleting}
+          >
+            <HiOutlineTrash />
+          </Button>
+          <Button
+            $variation="secondary"
+            $size="small"
+            onClick={() => setShowForm((show) => !show)}
+            disabled={isDeleting}
+          >
+            <HiOutlinePencil />
+          </Button>
+        </Action>
+      </TableRow>
+      {showForm && <CreateTradeForm editTrade={trade} />}
+    </>
   );
 }
 

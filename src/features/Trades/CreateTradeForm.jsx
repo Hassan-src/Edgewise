@@ -1,23 +1,28 @@
-import Form from "../../ui/Form";
-import Input from "../../ui/Input";
-import Button from "../../ui/Buttons";
-import Textarea from "../../ui/TextArea";
 import { useForm } from "react-hook-form";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addTrade } from "../../services/apiTrades";
+import { addEditTrade } from "../../services/apiTrades";
 import toast from "react-hot-toast";
-import StyledSelect from "../../ui/Select";
-import FormRow from "../../ui/FormRow";
 
-function CreateTradeForm() {
+import Form from "../../ui/Form";
+import FormRow from "../../ui/FormRow";
+import Input from "../../ui/Input";
+import StyledSelect from "../../ui/Select";
+import Textarea from "../../ui/TextArea";
+import Button from "../../ui/Buttons";
+
+function CreateTradeForm({ editTrade = {} }) {
+  const { id: editId, ...editValues } = editTrade;
+  const isEditingSession = Boolean(editId);
   // using react hook form library to manage the form
-  const { register, handleSubmit, reset, formState } = useForm();
+  const { register, handleSubmit, reset, formState } = useForm({
+    defaultValues: isEditingSession ? editValues : {},
+  });
   const { errors } = formState;
   // using query client to refetch the data from supabase
   const queryClient = useQueryClient();
   // mutating the data and adding new row
-  const { isLoading: isCreating, mutate } = useMutation({
-    mutationFn: addTrade,
+  const { isLoading: isAdding, mutate: addingTrade } = useMutation({
+    mutationFn: addEditTrade,
     onSuccess: () => {
       toast.success("New trade added");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
@@ -27,8 +32,24 @@ function CreateTradeForm() {
       toast.error(err.message);
     },
   });
+  // Editing the added row
+  const { isLoading: isEditing, mutate: editingTrade } = useMutation({
+    mutationFn: ({ newTradeData, editId }) =>
+      addEditTrade(newTradeData, editId),
+    onSuccess: () => {
+      toast.success("Trade successfully edited");
+      queryClient.invalidateQueries({ queryKey: ["trades"] });
+      reset();
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
+  const isWorking = isAdding || isEditing;
   function onSubmit(data) {
-    mutate(data);
+    console.log("kkkkkkkarim", editId);
+    if (isEditingSession) editingTrade({ newTradeData: data });
+    else addingTrade(data);
   }
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
@@ -36,7 +57,7 @@ function CreateTradeForm() {
         <Input
           type="datetime-local"
           id="open_time"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("open_time", { required: "Required field" })}
         />
       </FormRow>
@@ -44,7 +65,7 @@ function CreateTradeForm() {
         <Input
           type="datetime-local"
           id="close_time"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("close_time", { required: "Required field" })}
         />
       </FormRow>
@@ -54,7 +75,7 @@ function CreateTradeForm() {
           type="text"
           id="symbol"
           placeholder="e.g.xauusd"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("symbol", { required: "Required field" })}
         />
       </FormRow>
@@ -63,7 +84,7 @@ function CreateTradeForm() {
           {...register("side", {
             required: "Required field",
           })}
-          disabled={isCreating}
+          disabled={isWorking}
         >
           <option value="buy">buy</option>
           <option value="sell">sell</option>
@@ -78,9 +99,10 @@ function CreateTradeForm() {
           min="0"
           max="1000"
           step="0.01"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("volume", {
             required: "Required field",
+            valueAsNumber: true,
             validate: (value) => value > 0 || "Volume must be greater than 0",
           })}
         />
@@ -92,8 +114,11 @@ function CreateTradeForm() {
           placeholder="e.g.(4133.12)"
           min="0"
           step="0.01"
-          disabled={isCreating}
-          {...register("open_price", { required: "Required field" })}
+          disabled={isWorking}
+          {...register("open_price", {
+            required: "Required field",
+            valueAsNumber: true,
+          })}
         />
       </FormRow>
       <FormRow label="stop / loss" error={errors?.stop_loss?.message}>
@@ -103,8 +128,8 @@ function CreateTradeForm() {
           placeholder="e.g.(4133.12)"
           min="0"
           step="0.01"
-          disabled={isCreating}
-          {...register("stop_loss")}
+          disabled={isWorking}
+          {...register("stop_loss", { valueAsNumber: true })}
         />
       </FormRow>
       <FormRow label="take profit" error={errors?.take_profit?.message}>
@@ -114,8 +139,8 @@ function CreateTradeForm() {
           placeholder="e.g.(4133.12)"
           min="0"
           step="0.01"
-          disabled={isCreating}
-          {...register("take_profit")}
+          disabled={isWorking}
+          {...register("take_profit", { valueAsNumber: true })}
         />
       </FormRow>
       <FormRow label="close Price" error={errors?.close_price?.message}>
@@ -124,8 +149,11 @@ function CreateTradeForm() {
           id="close_price"
           placeholder="e.g.(4133.12)"
           step="0.01"
-          disabled={isCreating}
-          {...register("close_price", { required: "Required field" })}
+          disabled={isWorking}
+          {...register("close_price", {
+            required: "Required field",
+            valueAsNumber: true,
+          })}
         />
       </FormRow>
       <FormRow label="commission" error={errors?.commission?.message}>
@@ -135,9 +163,10 @@ function CreateTradeForm() {
           id="commission"
           step="0.01"
           defaultValue={0}
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("commission", {
             required: "Required field",
+            valueAsNumber: true,
             max: {
               value: 0,
               message: "Commission must be a negative number or 0",
@@ -152,9 +181,10 @@ function CreateTradeForm() {
           id="swap"
           step="0.01"
           defaultValue={0}
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("swap", {
             required: "Required field",
+            valueAsNumber: true,
             max: {
               value: 0,
               message: "Swap must be a negative number or 0",
@@ -169,9 +199,10 @@ function CreateTradeForm() {
           id="fee"
           defaultValue={0}
           step="0.01"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("fee", {
             required: "Required field",
+            valueAsNumber: true,
             max: {
               value: 0,
               message: "Fee must be a negative number or 0",
@@ -186,9 +217,10 @@ function CreateTradeForm() {
           id="profit"
           step="0.01"
           placeholder="e.g.(26.12,-31)"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("profit", {
             required: "Required field",
+            valueAsNumber: true,
           })}
         />
       </FormRow>
@@ -200,7 +232,7 @@ function CreateTradeForm() {
           minLength={0}
           maxLength={150}
           placeholder="your notes"
-          disabled={isCreating}
+          disabled={isWorking}
           {...register("notes")}
         />
       </FormRow>
@@ -208,8 +240,8 @@ function CreateTradeForm() {
         <Button $variation="secondary" $size="medium" type="reset">
           Cancel
         </Button>
-        <Button $variation="primary" $size="medium" disabled={isCreating}>
-          {isCreating ? "working..." : "submit"}
+        <Button $variation="primary" $size="medium" disabled={isWorking}>
+          {isEditingSession ? "Edit trade" : "add trade"}
         </Button>
       </FormRow>
     </Form>

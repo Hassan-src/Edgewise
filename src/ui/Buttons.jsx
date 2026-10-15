@@ -48,6 +48,7 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: var(--space-1);
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   border: none;

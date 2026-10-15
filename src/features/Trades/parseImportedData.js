@@ -6,7 +6,7 @@ export async function parseTradesFile(file) {
   const data = await readXlsxFile(file);
   const positions = extractPositionRows(data.at(0).data);
   return positions.map((row) => ({
-    source: "Imported",
+    source: "imported",
     open_time: row[0],
     external_position_id: String(row[1]),
     symbol: row[2],

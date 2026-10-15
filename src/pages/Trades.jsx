@@ -1,16 +1,34 @@
-import { HiOutlinePlus } from "react-icons/hi2";
+import { useState } from "react";
+import toast from "react-hot-toast";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import {
+  HiOutlineArrowUpTray,
+  HiOutlinePlus,
+  HiOutlineTrash,
+} from "react-icons/hi2";
+
 import TradesTable from "../features/Trades/TradesTable";
 import Button from "../ui/Buttons";
 import Row from "../ui/Row";
 import Heading from "../ui/Heading";
-import { useState } from "react";
 import CreateTradeForm from "../features/Trades/CreateTradeForm";
 import ImportTrades from "../features/Trades/ImportTrades";
+import { deleteImportedTrades } from "../services/apiTrades";
 
 function Trades() {
   const [showForm, setShowForm] = useState(false);
   const [showImport, setShowImport] = useState(false);
-
+  const queryClient = useQueryClient();
+  const { isLoading: isDeleting, mutate } = useMutation({
+    mutationFn: deleteImportedTrades,
+    onSuccess: () => {
+      toast.success("Imported data successfully deleted.");
+      queryClient.invalidateQueries({ queryKey: ["trades"] });
+    },
+    onError: (err) => {
+      toast.error(err.message);
+    },
+  });
   return (
     <>
       <Row $type="horizontal">
@@ -30,15 +48,19 @@ function Trades() {
           Add trade
         </Button>
         {showForm && <CreateTradeForm />}
+        <Button $size="medium" $variation="danger" onClick={mutate}>
+          <HiOutlineTrash />
+          Delete imported trades
+        </Button>
         <Button
-          $size="large"
-          $variation="primary"
+          $size="medium"
+          $variation="secondary"
           onClick={() => setShowImport((show) => !show)}
         >
-          <HiOutlinePlus />
+          <HiOutlineArrowUpTray />
           Import trades
         </Button>
-        {showImport && <ImportTrades />}
+        {showImport && <ImportTrades setShowImport={setShowImport} />}
       </Row>
     </>
   );

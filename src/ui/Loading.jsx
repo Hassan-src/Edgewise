@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import loading from "/public/loading.svg";
+import loading from "/loading.svg";
 const StyledLoading = styled.div`
   width: fit-content;
   margin: 0 auto;
