@@ -5,16 +5,17 @@ const Form = styled.form`
   font-size: var(--text-xl);
   padding: 0 var(--space-4);
   ${(props) =>
-    props.$type === "modal" &&
+    props.$type === "regular" &&
     css`
       padding: var(--space-4) var(--space-5);
       border: 3px solid var(--color-border);
       border-radius: var(--radius-md);
     `}
   ${(props) =>
-    props.$type !== "modal" &&
+    props.$type === "modal" &&
     css`
-      width: 80%;
+      width: 80rem;
+      height: 100%;
     `}
 `;
 

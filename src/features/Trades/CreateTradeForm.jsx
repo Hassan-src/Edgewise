@@ -1,7 +1,4 @@
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addEditTrade } from "../../services/apiTrades";
-import toast from "react-hot-toast";
 
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
@@ -10,52 +7,59 @@ import StyledSelect from "../../ui/Select";
 import Textarea from "../../ui/TextArea";
 import Button from "../../ui/Buttons";
 
-function CreateTradeForm({ editTrade = {} }) {
+import { useUpdateTrade } from "./useUpdateTrade";
+import { useAddTrade } from "./useAddTrade";
+
+function CreateTradeForm({ editTrade = {}, onCloseModal }) {
   const { id: editId, ...editValues } = editTrade;
-  const isEditingSession = Boolean(editId);
+  const isUpdatingSession = Boolean(editId);
+  const { isAdding, addingTrade } = useAddTrade();
+  const { isUpdating, updatingTrade } = useUpdateTrade();
   // using react hook form library to manage the form
   const { register, handleSubmit, reset, formState } = useForm({
-    defaultValues: isEditingSession ? editValues : {},
+    defaultValues: isUpdatingSession ? editValues : {},
   });
   const { errors } = formState;
-  // using query client to refetch the data from supabase
-  const queryClient = useQueryClient();
-  // mutating the data and adding new row
-  const { isLoading: isAdding, mutate: addingTrade } = useMutation({
-    mutationFn: addEditTrade,
-    onSuccess: () => {
-      toast.success("New trade added");
-      queryClient.invalidateQueries({ queryKey: ["trades"] });
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-  // Editing the added row
-  const { isLoading: isEditing, mutate: editingTrade } = useMutation({
-    mutationFn: ({ newTradeData, editId }) =>
-      addEditTrade(newTradeData, editId),
-    onSuccess: () => {
-      toast.success("Trade successfully edited");
-      queryClient.invalidateQueries({ queryKey: ["trades"] });
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
-  const isWorking = isAdding || isEditing;
+  // Handling the disabled attribute of the inputs
+  const isWorking = isAdding || isUpdating;
+
   function onSubmit(data) {
-    console.log("kkkkkkkarim", editId);
-    if (isEditingSession) editingTrade({ newTradeData: data });
-    else addingTrade(data);
+    // Since some of our values are generated in the supabase we should not pass it to the table
+    const {
+      net_profit,
+      user_id,
+      report_import_id,
+      source,
+      created_at,
+      ...tradeData
+    } = data;
+    if (isUpdatingSession)
+      updatingTrade(
+        { newTradeData: tradeData, editId },
+        {
+          onSuccess: () => {
+            reset();
+            onCloseModal?.();
+          },
+        },
+      );
+    else
+      addingTrade(tradeData, {
+        onSuccess: () => {
+          reset();
+          onCloseModal?.();
+        },
+      });
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit)}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      $type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="open Time" error={errors?.open_time?.message}>
         <Input
           type="datetime-local"
+          step="1"
           id="open_time"
           disabled={isWorking}
           {...register("open_time", { required: "Required field" })}
@@ -64,6 +68,7 @@ function CreateTradeForm({ editTrade = {} }) {
       <FormRow label="close Time" error={errors?.close_time?.message}>
         <Input
           type="datetime-local"
+          step="1"
           id="close_time"
           disabled={isWorking}
           {...register("close_time", { required: "Required field" })}
@@ -237,11 +242,16 @@ function CreateTradeForm({ editTrade = {} }) {
         />
       </FormRow>
       <FormRow>
-        <Button $variation="secondary" $size="medium" type="reset">
+        <Button
+          $variation="secondary"
+          $size="medium"
+          type="reset"
+          onClick={() => onCloseModal?.()}
+        >
           Cancel
         </Button>
         <Button $variation="primary" $size="medium" disabled={isWorking}>
-          {isEditingSession ? "Edit trade" : "add trade"}
+          {isUpdatingSession ? "Edit trade" : "add trade"}
         </Button>
       </FormRow>
     </Form>

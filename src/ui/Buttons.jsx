@@ -29,7 +29,7 @@ const $variations = {
   secondary: css`
     background-color: var(--color-accent-200);
     color: var(--color-text);
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--color-bg-400);
     &:hover {
       background-color: var(--color-accent-400);
     }

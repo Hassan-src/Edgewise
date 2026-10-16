@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
   --color-surface: #FFFFFF;
   --color-surface-muted: #E9EDF2;
   --color-bg-400:#D9DEE7;
-
+  --color-backdrop : rgb(255,255,255,0.1)
   // Border
   --color-border: #E1E5EB;
 

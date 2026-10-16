@@ -11,17 +11,14 @@ export async function getTrades() {
 }
 
 export async function addEditTrade(newTrade, id) {
-  console.log("newTradeData:", newTrade);
-  console.log("id:", id);
-  console.log("id type:", typeof id);
   // 1.Add/Edit trade
-  let query;
+  let query = supabase.from("trades");
   // A.Add
-  if (!id) query = supabase.from("trades").insert([newTrade]);
+  if (!id) query = query.insert([newTrade]);
   // B.Edit
-  if (id) query = supabase.from("trades").update(newTrade).eq("id", id);
+  if (id) query = query.update(newTrade).eq("id", id);
 
-  const { data, error } = await query.select().single();
+  const { data, error } = await query.select();
 
   if (error) {
     console.error(error);

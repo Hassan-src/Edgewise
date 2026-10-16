@@ -1,13 +1,12 @@
-import toast from "react-hot-toast";
-import { useState } from "react";
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import styled, { css } from "styled-components";
 
 import Button from "../../ui/Buttons";
 import CreateTradeForm from "./CreateTradeForm";
 import MetricValue from "../../ui/MetricValue";
-import { deleteTrade } from "../../services/apiTrades";
+import Modal from "../../ui/Modal";
+import ConfirmDelete from "../../ui/ConfirmDelete";
+import { useDeleteTrade } from "./useDeleteTrade";
 
 const $dir = {
   buy: css`
@@ -77,59 +76,50 @@ const Action = styled.div`
 `;
 
 function TradesRow({ trade }) {
-  const [showForm, setShowForm] = useState(false);
+  const { isDeleting, deleteTrade } = useDeleteTrade();
   // destructuring the fetched data
   const { id, symbol, net_profit, open_time, source, side: direction } = trade;
   const date = open_time.slice(0, 10);
-  // handling the delete btn using react query
-  const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate } = useMutation({
-    mutationFn: deleteTrade,
-    onSuccess: () => {
-      toast.success("Trade successfully deleted");
-      queryClient.invalidateQueries({
-        queryKey: ["trades"],
-      });
-    },
-    onError: (err) => toast.error(err.message),
-  });
   return (
-    <>
-      <TableRow role="row">
-        <Date>{date}</Date>
-        <Symbol>{symbol}</Symbol>
-        <Direction $dir={direction === "buy" ? "buy" : "sell"}>
-          {direction}
-        </Direction>
-        <PL>
-          <MetricValue $status={net_profit > 0 ? "profit" : "loss"}>
-            {net_profit > 0 ? `+${net_profit}` : net_profit}
-          </MetricValue>
-        </PL>
-        <Source $src={source === "manual" ? "manual" : "imported"}>
-          {source}
-        </Source>
-        <Action>
-          <Button
-            $variation="danger"
-            $size="small"
-            onClick={() => mutate(id)}
-            disabled={isDeleting}
-          >
-            <HiOutlineTrash />
-          </Button>
-          <Button
-            $variation="secondary"
-            $size="small"
-            onClick={() => setShowForm((show) => !show)}
-            disabled={isDeleting}
-          >
-            <HiOutlinePencil />
-          </Button>
-        </Action>
-      </TableRow>
-      {showForm && <CreateTradeForm editTrade={trade} />}
-    </>
+    <TableRow role="row">
+      <Date>{date}</Date>
+      <Symbol>{symbol}</Symbol>
+      <Direction $dir={direction === "buy" ? "buy" : "sell"}>
+        {direction}
+      </Direction>
+      <PL>
+        <MetricValue $status={net_profit > 0 ? "profit" : "loss"}>
+          {net_profit > 0 ? `+${net_profit}` : net_profit}
+        </MetricValue>
+      </PL>
+      <Source $src={source === "manual" ? "manual" : "imported"}>
+        {source}
+      </Source>
+      <Action>
+        <Modal>
+          <Modal.Open opens="delete-trade">
+            <Button $variation="danger" $size="small" disabled={isDeleting}>
+              <HiOutlineTrash />
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="delete-trade">
+            <ConfirmDelete
+              resourceName="trade"
+              disabled={isDeleting}
+              onConfirm={() => deleteTrade(id)}
+            />
+          </Modal.Window>
+          <Modal.Open opens="edit">
+            <Button $variation="secondary" $size="small" disabled={isDeleting}>
+              <HiOutlinePencil />
+            </Button>
+          </Modal.Open>
+          <Modal.Window name="edit">
+            <CreateTradeForm editTrade={trade} />
+          </Modal.Window>
+        </Modal>
+      </Action>
+    </TableRow>
   );
 }
 

@@ -1,8 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
 import styled from "styled-components";
-import { getTrades } from "../../services/apiTrades";
 import TradesRow from "./TradesRow";
 import Loading from "../../ui/Loading";
+import { useTrades } from "./useTrades";
 
 const Table = styled.div`
   background-color: var(--color-surface);
@@ -24,15 +23,7 @@ const TableHeader = styled.header`
 `;
 
 function TradesTable() {
-  // fetching the data using react query library
-  const {
-    isLoading,
-    data: trades,
-    error,
-  } = useQuery({
-    queryKey: ["trades"],
-    queryFn: getTrades,
-  });
+  const { isLoading, trades } = useTrades();
   if (isLoading) return <Loading />;
   return (
     <>

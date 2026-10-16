@@ -1,34 +1,21 @@
 import { useState } from "react";
 import { parseTradesFile } from "./parseImportedData";
 import { useForm } from "react-hook-form";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
 
 import FileInput from "../../ui/FileInput";
 import FormRow from "../../ui/FormRow";
 import Form from "../../ui/Form";
 import Button from "../../ui/Buttons";
-import { addImportedTrades } from "../../services/apiTrades";
+import { useImportTrade } from "./useImportTrade";
 
-function ImportTrades({ setShowImport }) {
+function ImportTradesForm({ onCloseModal }) {
   const [rows, setRows] = useState([]);
   const { register, handleSubmit, reset, formState } = useForm();
   const errors = formState;
-  const queryClient = useQueryClient();
-  const { isLoading: isSending, mutate } = useMutation({
-    mutationFn: addImportedTrades,
-    onSuccess: () => {
-      (toast.success("Trades Imported!"),
-        queryClient.invalidateQueries({ queryKey: ["trades"] }));
-      reset();
-    },
-    onError: (err) => {
-      toast.error(err.message);
-    },
-  });
+  const { isSending, addImportedTrades } = useImportTrade();
   async function handleImportData(e) {
     const file = e.target.files?.[0];
-    console.log(file);
     if (!file) return;
     try {
       const trades = await parseTradesFile(file);
@@ -39,16 +26,23 @@ function ImportTrades({ setShowImport }) {
     }
   }
   function onSubmit() {
-    console.log("rows:", rows);
     if (rows.length === 0) {
       toast.error("Check your file data!");
       return;
     }
-    mutate(rows);
-    setShowImport(false);
+    addImportedTrades(rows, {
+      onSuccess: () => {
+        reset();
+        onCloseModal?.();
+      },
+    });
   }
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} error={errors?.file?.message}>
+    <Form
+      onSubmit={handleSubmit(onSubmit)}
+      error={errors?.file?.message}
+      $type={onCloseModal ? "modal" : "regular"}
+    >
       <FormRow label="Report">
         <FileInput
           id="file"
@@ -59,6 +53,14 @@ function ImportTrades({ setShowImport }) {
         />
       </FormRow>
       <FormRow>
+        <Button
+          $variation="secondary"
+          $size="medium"
+          disabled={isSending}
+          onClick={() => onCloseModal?.()}
+        >
+          cancel
+        </Button>
         <Button $variation="primary" $size="medium" disabled={isSending}>
           Confirm
         </Button>
@@ -67,4 +69,4 @@ function ImportTrades({ setShowImport }) {
   );
 }
 
-export default ImportTrades;
+export default ImportTradesForm;
