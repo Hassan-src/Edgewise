@@ -1,12 +1,13 @@
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 import styled, { css } from "styled-components";
 
-import Button from "../../ui/Buttons";
 import CreateTradeForm from "./CreateTradeForm";
 import MetricValue from "../../ui/MetricValue";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
 import { useDeleteTrade } from "./useDeleteTrade";
+import Table from "../../ui/Table";
+import Menus from "../../ui/Menus";
 
 const $dir = {
   buy: css`
@@ -27,17 +28,6 @@ const $src = {
     background-color: var(--color-bg-400);
   `,
 };
-
-const TableRow = styled.div`
-  display: grid;
-  grid-template-columns: 0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.1fr;
-  align-items: center;
-  column-gap: var(--space-4);
-  padding: var(--space-3) var(--space-5);
-  &:not(:last-child) {
-    border-bottom: 1px solid var(--color-border);
-  }
-`;
 
 const Date = styled.div`
   font-family: var(--font-mono);
@@ -78,10 +68,17 @@ const Action = styled.div`
 function TradesRow({ trade }) {
   const { isDeleting, deleteTrade } = useDeleteTrade();
   // destructuring the fetched data
-  const { id, symbol, net_profit, open_time, source, side: direction } = trade;
+  const {
+    id: tradeId,
+    symbol,
+    net_profit,
+    open_time,
+    source,
+    side: direction,
+  } = trade;
   const date = open_time.slice(0, 10);
   return (
-    <TableRow role="row">
+    <Table.Row>
       <Date>{date}</Date>
       <Symbol>{symbol}</Symbol>
       <Direction $dir={direction === "buy" ? "buy" : "sell"}>
@@ -97,29 +94,32 @@ function TradesRow({ trade }) {
       </Source>
       <Action>
         <Modal>
-          <Modal.Open opens="delete-trade">
-            <Button $variation="danger" $size="small" disabled={isDeleting}>
-              <HiOutlineTrash />
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="delete-trade">
-            <ConfirmDelete
-              resourceName="trade"
-              disabled={isDeleting}
-              onConfirm={() => deleteTrade(id)}
-            />
-          </Modal.Window>
-          <Modal.Open opens="edit">
-            <Button $variation="secondary" $size="small" disabled={isDeleting}>
-              <HiOutlinePencil />
-            </Button>
-          </Modal.Open>
-          <Modal.Window name="edit">
-            <CreateTradeForm editTrade={trade} />
-          </Modal.Window>
+          <Menus.Menu>
+            <Menus.Toggle id={tradeId} />
+            <Menus.List id={tradeId}>
+              <Modal.Open opens="edit">
+                <Menus.Button icon={<HiOutlinePencil />}>Edit</Menus.Button>
+              </Modal.Open>
+              <Modal.Open opens="delete-trade">
+                <Menus.Button icon={<HiOutlineTrash />}>Delete</Menus.Button>
+              </Modal.Open>
+            </Menus.List>
+
+            <Modal.Window name="delete-trade">
+              <ConfirmDelete
+                resourceName="trade"
+                disabled={isDeleting}
+                onConfirm={() => deleteTrade(tradeId)}
+              />
+            </Modal.Window>
+
+            <Modal.Window name="edit">
+              <CreateTradeForm editTrade={trade} />
+            </Modal.Window>
+          </Menus.Menu>
         </Modal>
       </Action>
-    </TableRow>
+    </Table.Row>
   );
 }
 
