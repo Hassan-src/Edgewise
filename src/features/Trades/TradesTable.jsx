@@ -3,9 +3,19 @@ import Loading from "../../ui/Loading";
 import { useTrades } from "./useTrades";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
+import { useSearchParams } from "react-router-dom";
 
 function TradesTable() {
   const { isLoading, trades } = useTrades();
+  const [searchParams] = useSearchParams();
+  const filterValue = searchParams.get("source") || "all";
+  let filteredTrades;
+  if (filterValue === "all") filteredTrades = trades;
+  if (filterValue === "manual")
+    filteredTrades = trades.filter((trade) => trade.source === "manual");
+  if (filterValue === "imported")
+    filteredTrades = trades.filter((trade) => trade.source === "imported");
+
   if (isLoading) return <Loading />;
   return (
     <Menus>
@@ -19,7 +29,7 @@ function TradesTable() {
           <div>Action</div>
         </Table.Header>
         <Table.Body
-          data={trades}
+          data={filteredTrades}
           render={(trade) => <TradesRow trade={trade} key={trade.id} />}
         />
       </Table>

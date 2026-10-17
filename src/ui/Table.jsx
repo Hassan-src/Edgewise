@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 const StyledTable = styled.div`
   background-color: var(--color-surface);
-  border: 3px solid var(--color-bg-400);
+  border: 3px solid var(--color-border);
   box-shadow: var(--shadow-md);
   border-radius: var(--radius-md);
   overflow: hidden;
@@ -28,7 +28,7 @@ const StyledHeader = styled(CommonRow)`
 const StyledRow = styled(CommonRow)`
   padding: var(--space-3) var(--space-5);
   &:not(:last-child) {
-    border-bottom: 1px solid var(--color-bg-400);
+    border-bottom: 1px solid var(--color-border);
   }
 `;
 
@@ -78,7 +78,7 @@ function Row({ children }) {
 }
 
 function Body({ data, render }) {
-  if (!data.length) return <Empty>No data to show at the moment</Empty>;
+  if (!data?.length) return <Empty>No data to show at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 

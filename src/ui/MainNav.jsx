@@ -49,14 +49,14 @@ const StyledNavList = styled(NavLink)`
   & svg {
     width: 1.5rem;
     height: 1.5rem;
-    color: var(--color-accent);
+    color: var(--color-text);
     transition: all 0.2s;
   }
   &:hover svg,
   &:active svg,
   &.active:link svg,
   &.active:visited svg {
-    color: var(--color-text);
+    color: var(--color-accent);
   }
 `;
 

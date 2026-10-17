@@ -36,7 +36,7 @@ const StyledList = styled.ul`
   border-radius: var(--radius-sm);
   right: ${(props) => props.$position.x}px;
   top: ${(props) => props.$position.y}px;
-  border: 1px solid var(--color-bg-400);
+  border: 1px solid var(--color-border);
 `;
 
 const StyledButton = styled.button`
@@ -60,7 +60,10 @@ const StyledButton = styled.button`
     width: 1.2rem;
     height: 1.2rem;
     color: var(--color-text);
-    transition: all 0.3s;
+    transition: all 0.2s;
+  }
+  &:hover svg {
+    color: var(--color-accent);
   }
 `;
 

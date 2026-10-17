@@ -4,6 +4,7 @@ import Heading from "../ui/Heading";
 import TradesTable from "../features/Trades/TradesTable";
 import AddTrade from "../features/Trades/AddTrade";
 import DeleteImportedDataShow from "../features/Trades/DeleteImportedDataShow";
+import TradesTableOperations from "../features/Trades/TradesTableOperations";
 
 function Trades() {
   return (
@@ -16,7 +17,7 @@ function Trades() {
         </Row>
       </Row>
       <Row $type="horizontal">
-        <p>sort</p>
+        <TradesTableOperations />
       </Row>
       <Row $type="vertical" $gap="large">
         <TradesTable />

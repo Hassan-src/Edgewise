@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
   --color-surface: #FFFFFF;
   --color-surface-muted: #E9EDF2;
   --color-bg-400:#D9DEE7;
-  --color-backdrop : rgb(255,255,255,0.1)
+  --color-backdrop : rgb(255,255,255,0.1);
   // Border
   --color-border: #E1E5EB;
 
@@ -74,6 +74,7 @@ const GlobalStyles = createGlobalStyle`
   [data-theme="dark"] {
 
   --color-bg: #0C111B;
+  --color-bg-400: #1A253B;
   --color-surface: #141B28;
   --color-surface-muted: #1D2736;
   --color-border: #283243;
