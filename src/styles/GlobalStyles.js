@@ -126,7 +126,15 @@ const GlobalStyles = createGlobalStyle`
     font: inherit;
     color: inherit;
   }
-
+  select{
+    width: fit-content;
+  font-size: var(--text-lg);
+  text-transform: capitalize;
+  font-weight: 500;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  }
   button {
     cursor: pointer;
   }

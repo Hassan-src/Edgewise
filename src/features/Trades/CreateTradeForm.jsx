@@ -3,7 +3,6 @@ import { useForm } from "react-hook-form";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
-import StyledSelect from "../../ui/Select";
 import Textarea from "../../ui/TextArea";
 import Button from "../../ui/Buttons";
 
@@ -81,11 +80,14 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           id="symbol"
           placeholder="e.g.xauusd"
           disabled={isWorking}
-          {...register("symbol", { required: "Required field" })}
+          {...register("symbol", {
+            required: "Required field",
+            setValueAs: (value) => value.toUpperCase(),
+          })}
         />
       </FormRow>
       <FormRow label="direction" error={errors?.side?.message}>
-        <StyledSelect
+        <select
           {...register("side", {
             required: "Required field",
           })}
@@ -93,7 +95,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
         >
           <option value="buy">buy</option>
           <option value="sell">sell</option>
-        </StyledSelect>
+        </select>
       </FormRow>
       <FormRow label="volume" error={errors?.volume?.message}>
         <Input
