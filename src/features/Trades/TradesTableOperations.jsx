@@ -31,12 +31,14 @@ function TradesTableOperations() {
       />
       <SortBy
         options={[
+          { value: "all", label: "All P&L" },
           { value: "net_profit-desc", label: "Profit" },
           { value: "net_profit-asc", label: "Loss" },
         ]}
       />
       <SortBy
         options={[
+          { value: "all", label: "All Directions" },
           { value: "side-sell", label: "Sell" },
           { value: "side-buy", label: "Buy" },
         ]}

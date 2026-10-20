@@ -4,15 +4,15 @@ import { useTrades } from "./useTrades";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
+import Pagination from "../../ui/Pagination";
 
 function TradesTable() {
-  const { isLoading, trades } = useTrades();
+  const { isLoading, trades, count } = useTrades();
   const [searchParams] = useSearchParams();
   // 1) Filter by source
   const filterValue = searchParams.get("source") || "all";
 
   let filteredTrades;
-
   if (filterValue === "all") filteredTrades = trades;
 
   if (filterValue === "manual")
@@ -25,6 +25,8 @@ function TradesTable() {
   const sortBy = searchParams.get("SortBy") || "";
   const [field, direction] = sortBy.split("-");
   const modifier = direction === "asc" ? 1 : -1;
+
+  if (direction === "all") filteredTrades = trades;
 
   if (direction === "sell")
     filteredTrades = filteredTrades?.filter((trade) => trade.side === "sell");
@@ -57,6 +59,9 @@ function TradesTable() {
           data={sortedTrades}
           render={(trade) => <TradesRow trade={trade} key={trade.id} />}
         />
+        <Table.Footer>
+          <Pagination count={count} />
+        </Table.Footer>
       </Table>
     </Menus>
   );

@@ -1,13 +1,18 @@
+import { PAGE_SIZE } from "../utils/constants";
 import supabase from "./supabase";
 
-export async function getTrades() {
-  const { data, error } = await supabase.from("trades").select("*");
-
+export async function getTrades({ page = 1 } = {}) {
+  const from = (page - 1) * PAGE_SIZE;
+  const to = from + PAGE_SIZE - 1;
+  const { data, error, count } = await supabase
+    .from("trades")
+    .select("*", { count: "exact" })
+    .range(from, to);
   if (error) {
     console.error(error);
     throw new Error("could not get the data");
   }
-  return data;
+  return { data, count };
 }
 
 export async function addEditTrade(newTrade, id) {

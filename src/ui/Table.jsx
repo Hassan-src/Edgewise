@@ -36,10 +36,9 @@ const StyledBody = styled.section`
   margin: var(--space-2) 0;
 `;
 
-const Footer = styled.footer`
+const StyledFooter = styled.footer`
   display: flex;
-  justify-content: center;
-  padding: var(--space-4);
+  padding: var(--space-3);
   background-color: var(--color-surface-muted);
 `;
 
@@ -80,6 +79,10 @@ function Row({ children }) {
 function Body({ data, render }) {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
+}
+
+function Footer({ children }) {
+  return <StyledFooter>{children}</StyledFooter>;
 }
 
 Table.Header = Header;
