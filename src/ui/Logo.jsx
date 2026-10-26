@@ -1,5 +1,6 @@
 import styled, { css } from "styled-components";
 import imageSide from "/Logo-horizontal-light.svg";
+import imageVertical from "/Logo-vertical-light.svg";
 
 const StyledLogo = styled.div`
   text-align: center;
@@ -18,12 +19,23 @@ const Image = styled.img`
       height: 5rem;
       width: auto;
     `}
+    ${(props) =>
+    props.$type === "LogIn" &&
+    css`
+      height: 15rem;
+      width: auto;
+    `}
 `;
 
-function Logo() {
+function Logo({ $type = "SideBar" }) {
   return (
     <StyledLogo>
-      <Image fetchPriority="high" src={imageSide} alt="" />
+      <Image
+        fetchPriority="high"
+        src={$type === "LogIn" ? imageVertical : imageSide}
+        alt=""
+        $type={$type}
+      />
     </StyledLogo>
   );
 }

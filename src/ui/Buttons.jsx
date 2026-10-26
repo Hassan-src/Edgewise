@@ -44,7 +44,6 @@ const $variations = {
 };
 
 const Button = styled.button`
-  width: fit-content;
   display: flex;
   align-items: center;
   justify-content: center;
