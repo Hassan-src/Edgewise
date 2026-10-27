@@ -1,4 +1,8 @@
+import { useState } from "react";
 import styled from "styled-components";
+
+import { useLogin } from "./useLogin";
+
 import Button from "../../ui/Buttons";
 import Form from "../../ui/Form";
 import FormRowVertical from "../../ui/FormRowVertical";
@@ -6,6 +10,7 @@ import Heading from "../../ui/Heading";
 import Input from "../../ui/Input";
 import Logo from "../../ui/Logo";
 import Row from "../../ui/Row";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 const StyledLoginForm = styled.div`
   max-width: 100%;
@@ -25,6 +30,21 @@ const P = styled.p`
 `;
 
 function LoginForm() {
+  const [email, setEmail] = useState("hassane2880@gmail.com");
+  const [password, setPassword] = useState("13712345");
+  const { login, isLoading } = useLogin();
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!email || !password) return;
+    login(
+      { email, password },
+      {
+        onSettled: () => {
+          (setEmail(""), setPassword(""));
+        },
+      },
+    );
+  }
   return (
     <StyledLoginForm>
       <Logo $type="LogIn" />
@@ -32,16 +52,30 @@ function LoginForm() {
         <Heading $as="h4">Hi, welcome back!</Heading>
         <P>Enter your credentials to access your account.</P>
       </Row>
-      <Form $type="regular">
-        <FormRowVertical label="email">
-          <Input />
+      <Form $type="regular" onSubmit={handleSubmit}>
+        <FormRowVertical label="Email address">
+          <Input
+            type="email"
+            id="email"
+            autoComplete="username"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
+          />
         </FormRowVertical>
         <FormRowVertical label="password">
-          <Input />
+          <Input
+            type="password"
+            id="password"
+            autoComplete="corrent-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
+          />
         </FormRowVertical>
         <FormRowVertical>
-          <Button $variation="primary" $size="large">
-            Login
+          <Button $variation="primary" $size="large" disabled={isLoading}>
+            {!isLoading ? "Login" : <SpinnerMini />}
           </Button>
         </FormRowVertical>
       </Form>
