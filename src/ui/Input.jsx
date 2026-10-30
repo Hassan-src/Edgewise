@@ -4,6 +4,9 @@ const $size = {
   small: css`
     width: 11rem;
   `,
+  medium: css`
+    width: 20rem;
+  `,
 };
 
 const Input = styled.input`

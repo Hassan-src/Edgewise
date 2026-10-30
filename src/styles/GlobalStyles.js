@@ -41,6 +41,8 @@ const GlobalStyles = createGlobalStyle`
   --color-text: #202936;
   --color-text-secondary: #687386;
   --color-text-light:#EFF2F6;
+  --color-text-warning:#3D290A;
+  
   
   // Accent
   --color-accent: #0F8F75;
@@ -57,6 +59,7 @@ const GlobalStyles = createGlobalStyle`
   --color-profit: #16845C;
   --color-loss: #D14343;
   --color-warning: #B7791F;
+  --color-warning-light: #EECD9B;
 
   /* Radius */
   --radius-sm: 0.375rem;

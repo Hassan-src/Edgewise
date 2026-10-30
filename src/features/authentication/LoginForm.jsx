@@ -11,6 +11,8 @@ import Input from "../../ui/Input";
 import Logo from "../../ui/Logo";
 import Row from "../../ui/Row";
 import SpinnerMini from "../../ui/SpinnerMini";
+import TextLink from "../../ui/TextLink";
+import FormRow from "../../ui/FormRow";
 
 const StyledLoginForm = styled.div`
   max-width: 100%;
@@ -73,12 +75,13 @@ function LoginForm() {
             disabled={isLoading}
           />
         </FormRowVertical>
-        <FormRowVertical>
+        <FormRow>
           <Button $variation="primary" $size="large" disabled={isLoading}>
             {!isLoading ? "Login" : <SpinnerMini />}
           </Button>
-        </FormRowVertical>
+        </FormRow>
       </Form>
+      <TextLink $type="Login" />
     </StyledLoginForm>
   );
 }

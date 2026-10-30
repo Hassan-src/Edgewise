@@ -13,6 +13,9 @@ const $gap = {
   xlarge: css`
     gap: var(--space-8);
   `,
+  button: css`
+    margin-left: auto;
+  `,
 };
 
 const Row = styled.div`
