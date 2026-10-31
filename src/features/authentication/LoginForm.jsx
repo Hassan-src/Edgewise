@@ -34,7 +34,7 @@ const P = styled.p`
 function LoginForm() {
   const [email, setEmail] = useState("hassane2880@gmail.com");
   const [password, setPassword] = useState("13712345");
-  const { login, isLoading } = useLogin();
+  const { login, isPending } = useLogin();
   function handleSubmit(e) {
     e.preventDefault();
     if (!email || !password) return;
@@ -62,7 +62,7 @@ function LoginForm() {
             autoComplete="username"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            disabled={isLoading}
+            disabled={isPending}
           />
         </FormRowVertical>
         <FormRowVertical label="password">
@@ -72,12 +72,12 @@ function LoginForm() {
             autoComplete="corrent-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            disabled={isLoading}
+            disabled={isPending}
           />
         </FormRowVertical>
         <FormRow>
-          <Button $variation="primary" $size="large" disabled={isLoading}>
-            {!isLoading ? "Login" : <SpinnerMini />}
+          <Button $variation="primary" $size="large" disabled={isPending}>
+            {!isPending ? "Login" : <SpinnerMini />}
           </Button>
         </FormRow>
       </Form>

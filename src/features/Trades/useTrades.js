@@ -51,7 +51,7 @@ export function useTrades() {
   );
   // fetching the data
   const {
-    isLoading,
+    isPending,
     data: { data: trades, count } = {},
     error,
   } = useQuery({
@@ -114,5 +114,5 @@ export function useTrades() {
     ],
   );
 
-  return { isLoading, trades: trades ?? [], error, count: count ?? 0 };
+  return { isPending, trades: trades ?? [], error, count: count ?? 0 };
 }

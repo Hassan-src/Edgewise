@@ -18,6 +18,21 @@ const $gap = {
   `,
 };
 
+const $marginBottom = {
+  small: css`
+    margin-bottom: var(--space-2);
+  `,
+  medium: css`
+    margin-bottom: var(--space-4);
+  `,
+  large: css`
+    margin-bottom: var(--space-6);
+  `,
+  xlarge: css`
+    margin-bottom: var(--space-8);
+  `,
+};
+
 const Row = styled.div`
   display: flex;
 
@@ -28,11 +43,17 @@ const Row = styled.div`
       align-items: center;
     `}
   ${(props) =>
+    props.$type === "horizontalSticky" &&
+    css`
+      align-items: center;
+    `}
+  ${(props) =>
     props.$type === "vertical" &&
     css`
       flex-direction: column;
     `}
   ${(props) => $gap[props.$gap]}
+  ${(props) => $marginBottom[props.$marginBottom]}
 `;
 
 export default Row;

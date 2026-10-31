@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 export function useSignup() {
   const navigate = useNavigate();
-  const { mutate: signup, isLoading } = useMutation({
+  const { mutate: signup, isPending } = useMutation({
     mutationFn: signupApi,
     onSuccess: (data) => {
       if (data.session) {
@@ -18,5 +18,5 @@ export function useSignup() {
     },
     onError: (error) => toast.error(error.message),
   });
-  return { signup, isLoading };
+  return { signup, isPending };
 }

@@ -21,21 +21,21 @@ const $sizes = {
 const $variations = {
   primary: css`
     background-color: var(--color-accent);
-    color: var(--color-text-light);
+    color: var(--color-text-on-accent);
     &:hover {
       background-color: var(--color-accent-hover);
     }
   `,
   secondary: css`
-    background-color: var(--color-accent-200);
-    color: var(--color-text);
+    background-color: var(--color-accent-surface);
+    color: var(--color-on-accent-surface);
     border: 1px solid var(--color-border);
     &:hover {
-      background-color: var(--color-accent-400);
+      background-color: var(--color-accent-surface-hover);
     }
   `,
   danger: css`
-    background-color: var(--color-error);
+    background-color: var(--color-error-dark);
     color: var(--color-text-light);
     &:hover {
       background-color: var(--color-error-hover);

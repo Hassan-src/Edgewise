@@ -48,8 +48,7 @@ const PaginationButton = styled.button`
     height: 1.2rem;
   }
   &:hover:not(:disabled) {
-    background-color: var(--color-accent-hover);
-    color: var(--color-accent-200);
+    background-color: var(--color-bg-400);
   }
 `;
 

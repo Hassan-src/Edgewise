@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useDeleteTrade() {
   const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate: deleteTrade } = useMutation({
+  const { isPending: isDeleting, mutate: deleteTrade } = useMutation({
     mutationFn: deleteTradeApi,
     onSuccess: () => {
       toast.success("Trade successfully deleted");

@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useDeleteImportedTrades() {
   const queryClient = useQueryClient();
-  const { isLoading: isDeleting, mutate: deleteImportedTrades } = useMutation({
+  const { isPending: isDeleting, mutate: deleteImportedTrades } = useMutation({
     mutationFn: deleteImportedTradesApi,
     onSuccess: () => {
       toast.success("Imported data successfully deleted.");

@@ -34,7 +34,7 @@ const StyledNavList = styled(NavLink)`
   &.active:link,
   &.active:visited {
     color: var(--color-text);
-    background-color: var(--color-accent-200);
+    background-color: var(--color-surface-muted);
     border-radius: var(--radius-sm);
     &::before {
       content: "";

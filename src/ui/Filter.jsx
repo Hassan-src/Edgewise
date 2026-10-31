@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import styled, { css } from "styled-components";
 
 const StyledFilter = styled.div`
-  border: 1px solid var(--color-border);
+  border: 2px solid var(--color-border);
   background-color: var(--color-bg);
   box-shadow: var(--shadow-sm);
   border-radius: var(--radius-sm);
@@ -19,7 +19,7 @@ const FilterButton = styled.button`
     props.$active &&
     css`
       background-color: var(--color-accent);
-      color: var(--color-accent-200);
+      color: var(--color-text-on-accent);
     `}
 
   border-radius: var(--radius-sm);
@@ -31,7 +31,7 @@ const FilterButton = styled.button`
 
   &:hover:not(:disabled) {
     background-color: var(--color-accent);
-    color: var(--color-accent-200);
+    color: var(--color-text-on-accent);
   }
 `;
 

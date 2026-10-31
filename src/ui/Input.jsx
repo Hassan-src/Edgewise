@@ -15,6 +15,10 @@ const Input = styled.input`
   border-radius: var(--radius-sm);
   padding: var(--space-1) var(--space-2);
   ${(props) => $size[props.$size]}
+  &[value]:disabled {
+    color: var(--color-text);
+    opacity: 1;
+  }
 `;
 
 export default Input;

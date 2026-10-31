@@ -30,7 +30,7 @@ const P = styled.p`
 `;
 
 function SignupForm() {
-  const { signup, isLoading: isSubmitting } = useSignup();
+  const { signup, isPending: isSubmitting } = useSignup();
 
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;

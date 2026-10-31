@@ -12,17 +12,18 @@ import Menus from "../../ui/Menus";
 const $dir = {
   buy: css`
     background-color: var(--color-profit);
-    color: var(--color-accent-200);
+    color: var(--color-text-on-accent);
   `,
   sell: css`
-    background-color: var(--color-error);
-    color: var(--color-accent-200);
+    background-color: var(--color-loss);
+    color: var(--color-text-light);
   `,
 };
 
 const $src = {
   imported: css`
-    background-color: var(--color-accent-400);
+    background-color: var(--color-accent);
+    color: var(--color-text-on-accent);
   `,
   manual: css`
     background-color: var(--color-bg-400);

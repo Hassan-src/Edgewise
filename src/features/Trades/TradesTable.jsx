@@ -6,9 +6,9 @@ import Menus from "../../ui/Menus";
 import Pagination from "../../ui/Pagination";
 
 function TradesTable() {
-  const { isLoading, trades, count } = useTrades();
+  const { isPending, trades, count } = useTrades();
 
-  if (isLoading) return <Loading />;
+  if (isPending) return <Loading />;
   return (
     <Menus>
       <Table columns="0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.1fr">

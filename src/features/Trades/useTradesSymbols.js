@@ -3,12 +3,12 @@ import { getTradeSymbols } from "../../services/apiTrades";
 
 export function useTradesSymbol() {
   const {
-    isLoading,
+    isPending,
     data: symbols = [],
     error,
   } = useQuery({
     queryKey: ["tradesSymbols"],
     queryFn: getTradeSymbols,
   });
-  return { isLoading, symbols, error };
+  return { isPending, symbols, error };
 }

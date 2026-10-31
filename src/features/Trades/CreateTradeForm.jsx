@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import styled from "styled-components";
 
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
@@ -8,6 +9,16 @@ import Button from "../../ui/Buttons";
 
 import { useUpdateTrade } from "./useUpdateTrade";
 import { useAddTrade } from "./useAddTrade";
+
+const Select = styled.select`
+  background-color: transparent;
+  border: 2px solid var(--color-border);
+  cursor: pointer;
+  &:hover {
+    background-color: var(--color-surface-muted);
+    color: var(--color-text);
+  }
+`;
 
 function CreateTradeForm({ editTrade = {}, onCloseModal }) {
   const { id: editId, ...editValues } = editTrade;
@@ -87,7 +98,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
         />
       </FormRow>
       <FormRow label="direction" error={errors?.side?.message}>
-        <select
+        <Select
           {...register("side", {
             required: "Required field",
           })}
@@ -95,7 +106,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
         >
           <option value="buy">buy</option>
           <option value="sell">sell</option>
-        </select>
+        </Select>
       </FormRow>
       <FormRow label="volume" error={errors?.volume?.message}>
         <Input

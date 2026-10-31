@@ -6,7 +6,7 @@ export function useAddTrade() {
   // using query client to refetch the data from supabase
   const queryClient = useQueryClient();
   // mutating the data and adding new row
-  const { isLoading: isAdding, mutate: addingTrade } = useMutation({
+  const { isPending: isAdding, mutate: addingTrade } = useMutation({
     mutationFn: (newTradeData) => addEditTrade(newTradeData),
     onSuccess: () => {
       toast.success("New trade added");

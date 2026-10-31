@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 export function useImportTrade() {
   const queryClient = useQueryClient();
-  const { isLoading: isSending, mutate: addImportedTrades } = useMutation({
+  const { isPending: isSending, mutate: addImportedTrades } = useMutation({
     mutationFn: addImportedTradesApi,
     onSuccess: () => {
       (toast.success("Trades Imported!"),

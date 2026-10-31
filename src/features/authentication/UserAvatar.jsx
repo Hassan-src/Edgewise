@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { useUser } from "./useUser";
+import Avatar from "../../ui/Avatar";
 
 const StyledUserAvater = styled.div`
   display: flex;
@@ -12,25 +13,13 @@ const StyledUserAvater = styled.div`
   border-radius: var(--radius-full);
   padding-right: var(--space-3);
 `;
-const Avatar = styled.img`
-  width: 3rem;
-  height: 3rem;
-  display: block;
-  aspect-ratio: 1;
-  object-fit: contain;
-  object-position: center;
-  border-radius: var(--radius-full);
-`;
 
 function UserAvatar() {
   const { user } = useUser();
   const { userName, avatar } = user.user_metadata;
   return (
     <StyledUserAvater>
-      <Avatar
-        src={avatar || "default-user.svg"}
-        alt={`Avatar of ${userName}`}
-      />
+      <Avatar $type="header" src={avatar} alt={`Avatar of ${userName}`} />
       <span>{userName}</span>
     </StyledUserAvater>
   );
