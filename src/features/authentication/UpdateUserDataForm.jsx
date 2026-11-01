@@ -13,6 +13,7 @@ import Heading from "../../ui/Heading";
 import { useUser } from "./useUser";
 import SecondaryText from "../../ui/SecondaryText";
 import { useUpdateUser } from "./useUpdateUser";
+import SpinnerMini from "../../ui/SpinnerMini";
 
 const Box = styled.div`
   display: flex;
@@ -117,7 +118,7 @@ function UpdateUserDataForm() {
             Cancel
           </Button>
           <Button $variation="primary" $size="medium" disabled={isUpdating}>
-            Update account
+            {isUpdating ? <SpinnerMini /> : "Update account"}
           </Button>
         </FormRow>
       </Form>

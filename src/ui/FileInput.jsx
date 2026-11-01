@@ -8,7 +8,7 @@ const FileInput = styled.input.attrs({ type: "file" })`
     font-family: inherit;
     font-weight: 500;
     font-size: var(--text-lg);
-    color: var(--color-text-light);
+    color: var(--color-text-on-accent);
     background-color: var(--color-accent);
     border: none;
     border-radius: var(--radius-sm);

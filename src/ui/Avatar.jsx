@@ -4,6 +4,7 @@ const $type = {
   header: css`
     width: 2.5rem;
     height: 2.5rem;
+    outline: 2px solid var(--color-surface-muted);
   `,
   profile: css`
     width: 10rem;

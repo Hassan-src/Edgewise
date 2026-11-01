@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 import imageSide from "/Logo-horizontal-light.svg";
+import imageSideDark from "/Logo-horizontal-dark.svg";
 import imageVertical from "/Logo-vertical-light.svg";
+import imageVerticalDark from "/Logo-vertical-dark.svg";
+import { useDarkMode } from "../context/useDarkMode";
+import { login } from "../services/apiAuth";
+import { useState } from "react";
 
 const StyledLogo = styled.div`
   text-align: center;
@@ -28,11 +33,16 @@ const Image = styled.img`
 `;
 
 function Logo({ $type = "SideBar" }) {
+  const { isDarkMode } = useDarkMode();
+  const srcLogin =
+    $type === "LogIn" && isDarkMode ? imageVerticalDark : imageVertical;
+  const srcSideBar =
+    $type === "SideBar" && isDarkMode ? imageSideDark : imageSide;
   return (
     <StyledLogo>
       <Image
         fetchPriority="high"
-        src={$type === "LogIn" ? imageVertical : imageSide}
+        src={$type === "LogIn" ? srcLogin : srcSideBar}
         alt=""
         $type={$type}
       />

@@ -7,6 +7,7 @@ import FileInput from "../../ui/FileInput";
 import FormRow from "../../ui/FormRow";
 import Form from "../../ui/Form";
 import Button from "../../ui/Buttons";
+import Warning from "../../ui/Warning";
 import { useImportTrade } from "./useImportTrade";
 
 function ImportTradesForm({ onCloseModal }) {
@@ -38,34 +39,45 @@ function ImportTradesForm({ onCloseModal }) {
     });
   }
   return (
-    <Form
-      onSubmit={handleSubmit(onSubmit)}
-      error={errors?.file?.message}
-      $type={onCloseModal ? "modal" : "regular"}
-    >
-      <FormRow label="Report">
-        <FileInput
-          id="file"
-          accept=".xlsx"
-          {...register("file", { required: "Please select a file first." })}
-          onChange={handleImportData}
-          disabled={rows.length > 0}
-        />
-      </FormRow>
-      <FormRow>
-        <Button
-          $variation="secondary"
-          $size="medium"
-          disabled={isSending}
-          onClick={() => onCloseModal?.()}
-        >
-          cancel
-        </Button>
-        <Button $variation="primary" $size="medium" disabled={isSending}>
-          Confirm
-        </Button>
-      </FormRow>
-    </Form>
+    <>
+      <Warning $type="ordered">
+        <li>First open the history section of your meta trader account.</li>
+        <li>
+          Right click in the history tab and from the menu hover on report
+          section and click on (Open XML) and save the report.
+        </li>
+        <li>Open the report in excel and save a copy of it in your system.</li>
+        <li>Upload the copy here.</li>
+      </Warning>
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        error={errors?.file?.message}
+        $type={onCloseModal ? "modal" : "regular"}
+      >
+        <FormRow label="Report">
+          <FileInput
+            id="file"
+            accept=".xlsx"
+            {...register("file", { required: "Please select a file first." })}
+            onChange={handleImportData}
+            disabled={rows.length > 0}
+          />
+        </FormRow>
+        <FormRow>
+          <Button
+            $variation="secondary"
+            $size="medium"
+            disabled={isSending}
+            onClick={() => onCloseModal?.()}
+          >
+            cancel
+          </Button>
+          <Button $variation="primary" $size="medium" disabled={isSending}>
+            Confirm
+          </Button>
+        </FormRow>
+      </Form>
+    </>
   );
 }
 
