@@ -47,7 +47,7 @@ const GlobalStyles = createGlobalStyle`
   --color-surface: #FFFFFF;
   --color-surface-muted: #E9EDF2;
   --color-bg-400: #D9DEE7;
-
+  --color-scroll-thumb: #9FABC3;
   /* Borders */
   --color-border: #F0F2F5;
 
@@ -85,7 +85,8 @@ const GlobalStyles = createGlobalStyle`
   --color-surface: #141B28;
   --color-surface-muted: #1D2736;
   --color-bg-400: #1A253B;
-
+  --color-scroll-thumb: #364C78;
+  
   /* Borders */
   --color-border: #283243;
 
@@ -206,6 +207,7 @@ const GlobalStyles = createGlobalStyle`
     /* For dark mode */
     filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
   }
+  
 `;
 
 export default GlobalStyles;

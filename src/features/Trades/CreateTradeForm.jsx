@@ -9,6 +9,7 @@ import Button from "../../ui/Buttons";
 
 import { useUpdateTrade } from "./useUpdateTrade";
 import { useAddTrade } from "./useAddTrade";
+import { useAccount } from "./useAccount";
 
 const Select = styled.select`
   background-color: transparent;
@@ -25,6 +26,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
   const isUpdatingSession = Boolean(editId);
   const { isAdding, addingTrade } = useAddTrade();
   const { isUpdating, updatingTrade } = useUpdateTrade();
+  const { account } = useAccount();
   // using react hook form library to manage the form
   const { register, handleSubmit, reset, formState } = useForm({
     defaultValues: isUpdatingSession ? editValues : {},
@@ -35,14 +37,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
 
   function onSubmit(data) {
     // Since some of our values are generated in the supabase we should not pass it to the table
-    const {
-      net_profit,
-      user_id,
-      report_import_id,
-      source,
-      created_at,
-      ...tradeData
-    } = data;
+    const { net_profit, user_id, source, created_at, ...tradeData } = data;
     if (isUpdatingSession)
       updatingTrade(
         { newTradeData: tradeData, editId },

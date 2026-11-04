@@ -1,12 +1,16 @@
 import Row from "../ui/Row";
 import Heading from "../ui/Heading";
+import NoAccount from "../ui/NoAccount";
 
 import TradesTable from "../features/Trades/TradesTable";
 import AddTrade from "../features/Trades/AddTrade";
 import DeleteImportedDataShow from "../features/Trades/DeleteImportedDataShow";
 import TradesTableOperations from "../features/Trades/TradesTableOperations";
+import { useAccount } from "../features/Trades/useAccount";
 
 function Trades() {
+  const { account } = useAccount();
+  if (account.length === 0) return <NoAccount />;
   return (
     <>
       <Row $type="horizontal">

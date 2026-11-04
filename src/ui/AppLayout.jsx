@@ -13,7 +13,17 @@ const StyledAppLayout = styled.div`
 const Main = styled.main`
   background-color: var(--color-bg);
   padding: var(--space-16) var(--space-12) var(--space-16);
-  overflow: scroll;
+  overflow-x: scroll;
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-scroll-thumb);
+    border-radius: 4px;
+  }
 `;
 
 const Container = styled.div`

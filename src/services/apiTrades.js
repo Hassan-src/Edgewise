@@ -94,7 +94,8 @@ export async function deleteImportedTrades() {
   const { data, error } = await supabase
     .from("trades")
     .delete()
-    .eq("source", "imported");
+    .eq("source", "imported")
+    .select();
   if (error) {
     console.error(error);
     throw new Error("could not get the data");
