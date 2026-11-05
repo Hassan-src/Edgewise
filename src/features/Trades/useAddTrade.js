@@ -11,6 +11,7 @@ export function useAddTrade() {
     onSuccess: () => {
       toast.success("New trade added");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
+      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => {
       toast.error(err.message);

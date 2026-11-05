@@ -1,20 +1,16 @@
 import styled from "styled-components";
+import TradesPerformance from "./TradesPerformance";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
-  grid-template-rows: 12rem 1fr 1fr;
-  gap: var(--space-2);
+  grid-template-rows: 1fr 1fr 1fr;
+  gap: var(--space-4);
 `;
 
 function DashboardLayout() {
   return (
     <StyledDashboardLayout>
-      <div>
-        <div>Net P&L</div>
-        <div>Trade win%</div>
-        <div>Profit Factor</div>
-        <div>Expectancy</div>
-      </div>
+      <TradesPerformance />
       <div>Performance overview</div>
       <div>Recent Trades</div>
     </StyledDashboardLayout>

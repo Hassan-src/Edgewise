@@ -25,11 +25,22 @@ const $sizes = {
   large: css`
     font-size: var(--text-4xl);
   `,
+  cardMain: css`
+    font-size: var(--text-5xl);
+    font-weight: 600;
+  `,
+  cardSecondary: css`
+    font-size: var(--text-lg);
+    font-weight: 600;
+  `,
 };
 
 const MetricValue = styled.span`
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
 
   ${(props) => $status[props.$status]}
   ${(props) => $sizes[props.$size]}

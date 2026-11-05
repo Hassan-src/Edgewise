@@ -36,11 +36,15 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
   const isWorking = isAdding || isUpdating;
 
   function onSubmit(data) {
-    // Since some of our values are generated in the supabase we should not pass it to the table
+    // Since some of our values are generated in the supabase we should not pass them to the table
     const { net_profit, user_id, source, created_at, ...tradeData } = data;
+    const tradeInfo = { ...tradeData, trading_account_id: account[0].id };
     if (isUpdatingSession)
       updatingTrade(
-        { newTradeData: tradeData, editId },
+        {
+          newTradeData: tradeInfo,
+          editId,
+        },
         {
           onSuccess: () => {
             reset();
@@ -49,7 +53,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
         },
       );
     else
-      addingTrade(tradeData, {
+      addingTrade(tradeInfo, {
         onSuccess: () => {
           reset();
           onCloseModal?.();

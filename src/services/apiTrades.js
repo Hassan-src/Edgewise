@@ -41,6 +41,14 @@ export async function getTrades({
   return { data, count };
 }
 
+export async function getAllTrades() {
+  const { data, error } = await supabase.from("trades").select("net_profit");
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
 export async function getTradeSymbols() {
   const { data, error } = await supabase.from("trades").select("symbol");
 

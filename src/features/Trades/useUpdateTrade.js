@@ -11,6 +11,7 @@ export function useUpdateTrade() {
     onSuccess: () => {
       toast.success("Trade successfully edited");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
+      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => {
       toast.error(err.message);

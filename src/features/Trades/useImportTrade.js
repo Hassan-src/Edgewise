@@ -7,8 +7,9 @@ export function useImportTrade() {
   const { isPending: isSending, mutate: addImportedTrades } = useMutation({
     mutationFn: addImportedTradesApi,
     onSuccess: () => {
-      (toast.success("Trades Imported!"),
-        queryClient.invalidateQueries({ queryKey: ["trades"] }));
+      toast.success("Trades Imported!");
+      queryClient.invalidateQueries({ queryKey: ["trades"] });
+      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => {
       toast.error(err.message);

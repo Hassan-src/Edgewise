@@ -14,6 +14,8 @@ const GlobalStyles = createGlobalStyle`
   --text-2xl: 1.5rem;
   --text-3xl: 1.875rem;
   --text-4xl: 2.25rem;
+  --text-5xl: 2.375rem;
+  --text-6xl: 2.5rem;
 
   /* Spacing: 4px base */
   --space-1: 0.25rem;

@@ -9,12 +9,14 @@ import Form from "../../ui/Form";
 import Button from "../../ui/Buttons";
 import Warning from "../../ui/Warning";
 import { useImportTrade } from "./useImportTrade";
+import { useAccount } from "./useAccount";
 
 function ImportTradesForm({ onCloseModal }) {
   const [rows, setRows] = useState([]);
   const { register, handleSubmit, reset, formState } = useForm();
-  const errors = formState;
+  const { errors } = formState;
   const { isSending, addImportedTrades } = useImportTrade();
+  const { account } = useAccount();
   async function handleImportData(e) {
     const file = e.target.files?.[0];
     if (!file) return;
@@ -31,9 +33,15 @@ function ImportTradesForm({ onCloseModal }) {
       toast.error("Check your file data!");
       return;
     }
-    addImportedTrades(rows, {
+    const tradesWithAccount = rows.map((trade) => ({
+      ...trade,
+      trading_account_id: account[0].id,
+    }));
+
+    addImportedTrades(tradesWithAccount, {
       onSuccess: () => {
         reset();
+        setRows([]);
         onCloseModal?.();
       },
     });
@@ -58,8 +66,10 @@ function ImportTradesForm({ onCloseModal }) {
           <FileInput
             id="file"
             accept=".xlsx"
-            {...register("file", { required: "Please select a file first." })}
-            onChange={handleImportData}
+            {...register("file", {
+              required: "Please select a file first.",
+              onChange: handleImportData,
+            })}
             disabled={rows.length > 0}
           />
         </FormRow>

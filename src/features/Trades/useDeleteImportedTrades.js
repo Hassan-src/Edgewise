@@ -9,6 +9,7 @@ export function useDeleteImportedTrades() {
     onSuccess: () => {
       toast.success("Imported data successfully deleted.");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
+      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => {
       toast.error(err.message);

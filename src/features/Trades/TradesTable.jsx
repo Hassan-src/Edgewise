@@ -4,11 +4,12 @@ import { useTrades } from "./useTrades";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Pagination from "../../ui/Pagination";
+import { useAccount } from "./useAccount";
 
 function TradesTable() {
-  const { isPending, trades, count } = useTrades();
-
-  if (isPending) return <Loading />;
+  const { isPending: tradesLoading, trades, count } = useTrades();
+  const { isPending: accountLoading } = useAccount();
+  if (tradesLoading || accountLoading) return <Loading />;
   return (
     <Menus>
       <Table columns="0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.1fr">

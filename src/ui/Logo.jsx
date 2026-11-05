@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
+
 import imageSide from "/Logo-horizontal-light.svg";
 import imageSideDark from "/Logo-horizontal-dark.svg";
 import imageVertical from "/Logo-vertical-light.svg";
 import imageVerticalDark from "/Logo-vertical-dark.svg";
+
 import { useDarkMode } from "../context/useDarkMode";
-import { login } from "../services/apiAuth";
-import { useState } from "react";
 
 const StyledLogo = styled.div`
   text-align: center;
