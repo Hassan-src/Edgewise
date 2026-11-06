@@ -68,7 +68,9 @@ const GlobalStyles = createGlobalStyle`
 
   /* Financial */
   --color-profit: #16845C;
+  --color-profit-transparent: rgb(87, 214, 163, 0.2);
   --color-loss: #D14343;
+  --color-loss-transparent: rgb(209, 67, 67, 0.2);
   --color-warning: #B7791F;
 
   /* Shadows */
@@ -107,7 +109,9 @@ const GlobalStyles = createGlobalStyle`
 
   /* Financial */
   --color-profit: #57D6A3;
+  --color-profit-transparent: rgb(87, 214, 163, 0.2);
   --color-loss: #FF5C5C;
+  --color-loss-transparent: rgb(255, 92, 92,0.2);
   --color-warning: #F2C36B;
 
   /* Shadows */

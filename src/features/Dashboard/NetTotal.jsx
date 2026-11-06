@@ -38,10 +38,12 @@ function NetTotal() {
   if (isLoadingAccount || isLoadingTrades) return <Loading />;
 
   const initialBalance = Number(account?.[0]?.initial_balance ?? 0);
+
   const totalProfit = trades.reduce(
     (total, trade) => total + Number(trade.net_profit ?? 0),
     0,
   );
+
   const profitInPercentage =
     initialBalance > 0 ? (totalProfit / initialBalance) * 100 : null;
 

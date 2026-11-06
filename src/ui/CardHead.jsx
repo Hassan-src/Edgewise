@@ -3,10 +3,11 @@ import styled from "styled-components";
 const Head = styled.span`
   font-size: var(--text-xl);
   font-weight: 600;
+  text-transform: capitalize;
   display: flex;
-  gap: var(--space-2);
   align-items: center;
-  & svg {
+  gap: var(--space-2);
+  & > svg {
     width: 2rem;
     height: 2rem;
     color: var(--color-on-accent-surface);

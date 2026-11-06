@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import Card from "../../ui/Card";
 import NetTotal from "./NetTotal";
+import Expectancy from "./Expectancy";
+import TradeWinRatio from "./TradeWinRatio";
+import ProfitFactor from "./ProfitFactor";
 
 const StyledTradesPerformance = styled.div`
   display: grid;
@@ -12,9 +14,9 @@ function TradesPerformance() {
   return (
     <StyledTradesPerformance>
       <NetTotal />
-      <Card></Card>
-      <Card></Card>
-      <Card></Card>
+      <TradeWinRatio />
+      <ProfitFactor />
+      <Expectancy />
     </StyledTradesPerformance>
   );
 }
