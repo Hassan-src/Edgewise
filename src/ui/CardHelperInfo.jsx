@@ -14,7 +14,8 @@ const StyledHelperInfo = styled.div`
 `;
 
 const InfoMark = styled.span`
-  display: inline-block;
+  display: flex;
+  align-items: center;
   text-align: center;
   & svg {
     width: 1.5rem;
@@ -34,8 +35,9 @@ const InfoText = styled.span`
   font-size: var(--text-sm);
   position: absolute;
   z-index: 999;
-  top: 100%;
-  left: -50%;
+  top: 120%;
+  right: 50%;
+  transform: translate(50%);
   transition:
     opacity 0.2s,
     visibility 0.2s;

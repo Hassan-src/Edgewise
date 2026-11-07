@@ -15,6 +15,7 @@ import { useAccount } from "../Trades/useAccount";
 import { useAllTrades } from "./useAllTrades";
 import CardInfo from "../../ui/CardInfo";
 import Chart from "../../ui/CardChart";
+import CardHelperInfo from "../../ui/CardHelperInfo";
 
 function Expectancy() {
   const { trades, isPending: isLoadingTrades } = useAllTrades();
@@ -52,6 +53,10 @@ function Expectancy() {
         <Head>
           <HiOutlineChartBar />
           Expectancy
+          <CardHelperInfo>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
+            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+          </CardHelperInfo>
         </Head>
         {expectancy > 0 ? (
           <MetricValue $size="cardMain" $status="profit">

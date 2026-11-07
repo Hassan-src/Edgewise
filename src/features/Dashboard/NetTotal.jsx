@@ -14,6 +14,7 @@ import TrendLine from "../../ui/TrendLine";
 import { useAccount } from "../Trades/useAccount";
 import { formatCurrency, formatPercentage } from "../../utils/helper";
 import { useAllTrades } from "./useAllTrades";
+import CardHelperInfo from "../../ui/CardHelperInfo";
 
 const StyledNetTotal = styled.div`
   display: flex;
@@ -53,6 +54,10 @@ function NetTotal() {
         <Head>
           <HiOutlineArrowTrendingUp />
           Net P&L
+          <CardHelperInfo>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
+            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+          </CardHelperInfo>
         </Head>
         {totalProfit > 0 ? (
           <MetricValue $size="cardMain" $status="profit">
