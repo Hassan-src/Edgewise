@@ -9,7 +9,6 @@ export function useDeleteTrade() {
     onSuccess: () => {
       toast.success("Trade successfully deleted");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
-      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => toast.error(err.message),
   });

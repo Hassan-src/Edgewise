@@ -42,7 +42,21 @@ export async function getTrades({
 }
 
 export async function getAllTrades() {
-  const { data, error } = await supabase.from("trades").select("net_profit");
+  const { data, error } = await supabase
+    .from("trades")
+    .select("close_time,net_profit");
+
+  if (error) throw new Error(error.message);
+
+  return data;
+}
+
+export async function getRecentTrades() {
+  const { data, error } = await supabase
+    .from("trades")
+    .select("*")
+    .order("open_time", { ascending: false })
+    .limit(5);
 
   if (error) throw new Error(error.message);
 

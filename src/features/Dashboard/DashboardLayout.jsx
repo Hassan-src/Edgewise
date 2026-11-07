@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import TradesPerformance from "./TradesPerformance";
+import PerformanceOverview from "./PerformanceOverview";
+import RecentTrades from "./RecentTrades";
 
 const StyledDashboardLayout = styled.div`
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: 12rem 1fr 1fr;
   gap: var(--space-4);
 `;
 
@@ -11,8 +13,8 @@ function DashboardLayout() {
   return (
     <StyledDashboardLayout>
       <TradesPerformance />
-      <div>Performance overview</div>
-      <div>Recent Trades</div>
+      <PerformanceOverview />
+      <RecentTrades />
     </StyledDashboardLayout>
   );
 }

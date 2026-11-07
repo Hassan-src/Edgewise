@@ -81,7 +81,9 @@ function LoginForm() {
           </Button>
         </FormRow>
       </Form>
-      <TextLink $type="Login" />
+      <TextLink $linkText="Sign up" to="/signup">
+        Don't have an account?
+      </TextLink>
     </StyledLoginForm>
   );
 }

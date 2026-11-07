@@ -9,7 +9,6 @@ export function useImportTrade() {
     onSuccess: () => {
       toast.success("Trades Imported!");
       queryClient.invalidateQueries({ queryKey: ["trades"] });
-      queryClient.invalidateQueries({ queryKey: ["all-trades"] });
     },
     onError: (err) => {
       toast.error(err.message);

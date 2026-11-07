@@ -16,6 +16,7 @@ import { useAllTrades } from "./useAllTrades";
 import CardInfo from "../../ui/CardInfo";
 import Chart from "../../ui/CardChart";
 import CardHelperInfo from "../../ui/CardHelperInfo";
+import Row from "../../ui/Row";
 
 function Expectancy() {
   const { trades, isPending: isLoadingTrades } = useAllTrades();
@@ -50,14 +51,16 @@ function Expectancy() {
   return (
     <Card>
       <CardInfo>
-        <Head>
-          <HiOutlineChartBar />
-          Expectancy
+        <Row $type="horizontalSticky" $gap="small">
+          <Head>
+            <HiOutlineChartBar />
+            Expectancy
+          </Head>
           <CardHelperInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
-            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+            Average profit or loss expected per trade based on historical
+            results.
           </CardHelperInfo>
-        </Head>
+        </Row>
         {expectancy > 0 ? (
           <MetricValue $size="cardMain" $status="profit">
             {formatCurrency(expectancy)}

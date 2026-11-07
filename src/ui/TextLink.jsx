@@ -8,6 +8,9 @@ const StyledTextLink = styled.div`
 `;
 
 const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
   color: var(--color-accent);
   transition: all 0.2s;
   &:hover {
@@ -16,19 +19,15 @@ const StyledLink = styled(Link)`
   }
 `;
 
-function TextLink({ $type }) {
+function TextLink({ $linkText, children, to, icon }) {
   return (
     <StyledTextLink>
       <p>
-        {$type === "Signup" ? (
-          <>
-            Already have an account? <StyledLink to="/login">Login</StyledLink>
-          </>
-        ) : (
-          <>
-            Don't have an account? <StyledLink to="/signup">Sign up</StyledLink>
-          </>
-        )}
+        {children}
+        <StyledLink to={to}>
+          {$linkText}
+          {icon}
+        </StyledLink>
       </p>
     </StyledTextLink>
   );

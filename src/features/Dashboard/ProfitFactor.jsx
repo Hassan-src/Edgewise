@@ -50,14 +50,15 @@ function ProfitFactor() {
   return (
     <Card>
       <CardInfo>
-        <Head>
-          <HiOutlineScale />
-          Profit factor
+        <Row $type="horizontalSticky" $gap="small">
+          <Head>
+            <HiOutlineScale />
+            Profit factor
+          </Head>
           <CardHelperInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
-            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+            Gross profit generated for every unit of gross loss.
           </CardHelperInfo>
-        </Head>
+        </Row>
         <MetricValue $size="cardMain">{profitFactor?.toFixed(2)}</MetricValue>
         <Row $type="horizontalSticky" $gap="small">
           <CardFooter $type="Profit">{chartProfitValue?.toFixed(1)}</CardFooter>
@@ -71,7 +72,7 @@ function ProfitFactor() {
               data={profitFactorData}
               dataKey="value"
               cx="80%"
-              cy="50%"
+              cy="60%"
               startAngle={90}
               endAngle={-270}
               innerRadius={42}

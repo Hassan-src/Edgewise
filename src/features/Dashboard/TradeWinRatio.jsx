@@ -36,14 +36,15 @@ function TradeWinRatio() {
   return (
     <Card>
       <CardInfo>
-        <Head>
-          <HiOutlinePercentBadge />
-          Trade win %
+        <Row $type="horizontalSticky" $gap="small">
+          <Head>
+            <HiOutlinePercentBadge />
+            Trade win %
+          </Head>
           <CardHelperInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
-            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+            Percentage of closed trades that end in profit.
           </CardHelperInfo>
-        </Head>
+        </Row>
         <MetricValue $size="cardMain">{formatPercentage(winRatio)}</MetricValue>
         <Row $type="horizontalSticky" $gap="small">
           <CardFooter $type="Profit">{winningTrades}W</CardFooter>

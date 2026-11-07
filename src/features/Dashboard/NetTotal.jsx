@@ -15,6 +15,7 @@ import { useAccount } from "../Trades/useAccount";
 import { formatCurrency, formatPercentage } from "../../utils/helper";
 import { useAllTrades } from "./useAllTrades";
 import CardHelperInfo from "../../ui/CardHelperInfo";
+import Row from "../../ui/Row";
 
 const StyledNetTotal = styled.div`
   display: flex;
@@ -51,14 +52,15 @@ function NetTotal() {
   return (
     <Card>
       <StyledNetTotal>
-        <Head>
-          <HiOutlineArrowTrendingUp />
-          Net P&L
+        <Row $type="horizontalSticky" $gap="small">
+          <Head>
+            <HiOutlineArrowTrendingUp />
+            Net P&L
+          </Head>
           <CardHelperInfo>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut commodi,
-            obcaecati atque asperiores, maiores corrupti vel exercitationem rem
+            Total profit or loss after trading costs.
           </CardHelperInfo>
-        </Head>
+        </Row>
         {totalProfit > 0 ? (
           <MetricValue $size="cardMain" $status="profit">
             {formatCurrency(totalProfit)}

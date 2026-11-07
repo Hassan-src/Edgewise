@@ -3,7 +3,7 @@ import { getAllTrades } from "../../services/apiTrades";
 
 export function useAllTrades() {
   const { isPending, data, error } = useQuery({
-    queryKey: ["all-trades"],
+    queryKey: ["trades", "all-trades"],
     queryFn: () => getAllTrades(),
   });
 
