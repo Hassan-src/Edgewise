@@ -24,6 +24,7 @@ function RecentTrades() {
             Recent Trades
           </Head>
           <TextLink
+            $type="link"
             $linkText="View All"
             to="/trades"
             icon={<HiOutlineArrowSmallRight />}

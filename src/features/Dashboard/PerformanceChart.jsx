@@ -3,7 +3,6 @@ import {
   ComposedChart,
   CartesianGrid,
   Cell,
-  Line,
   ReferenceLine,
   ResponsiveContainer,
   Tooltip,
@@ -17,7 +16,6 @@ import ChartToolTip from "./ChartToolTip";
 
 function PerformanceChart({ trades }) {
   const data = getTradePerformance(trades);
-
   return (
     <ResponsiveContainer width="100%" height="100%">
       <ComposedChart

@@ -2,16 +2,17 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import SideBar from "./SideBar";
 import styled from "styled-components";
+import { useAppMode } from "../context/useAppMode";
 
 const StyledAppLayout = styled.div`
   display: grid;
-  grid-template-columns: 20rem 1fr;
-  grid-template-rows: auto 1fr;
+  grid-template-columns: ${(props) =>
+    props.$sideType === "expand" ? "16rem 1fr" : "5rem 1fr"};
+  grid-template-rows: auto minmax(0, 1fr);
   height: 100dvh;
 `;
 
 const Main = styled.main`
-  background-color: var(--color-bg);
   padding: var(--space-16) 0 var(--space-16);
   overflow-x: scroll;
   &::-webkit-scrollbar {
@@ -35,8 +36,9 @@ const Container = styled.div`
 `;
 
 function AppLayout() {
+  const { resize } = useAppMode();
   return (
-    <StyledAppLayout>
+    <StyledAppLayout $sideType={resize ? "expand" : "shrink"}>
       <Header />
       <SideBar />
       <Main>

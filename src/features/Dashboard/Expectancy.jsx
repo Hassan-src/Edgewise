@@ -50,7 +50,7 @@ function Expectancy() {
 
   return (
     <Card>
-      <CardInfo>
+      <CardInfo $gap="medium">
         <Row $type="horizontalSticky" $gap="small">
           <Head>
             <HiOutlineChartBar />

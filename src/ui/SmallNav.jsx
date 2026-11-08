@@ -1,0 +1,92 @@
+import { NavLink } from "react-router-dom";
+import {
+  HiOutlineBookOpen,
+  HiOutlineChartPie,
+  HiOutlineCog6Tooth,
+  HiOutlineListBullet,
+  HiOutlineSquares2X2,
+} from "react-icons/hi2";
+import styled from "styled-components";
+
+const NavList = styled.ul`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+`;
+
+const StyledNavList = styled(NavLink)`
+  &:link,
+  &:visited {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    color: var(--color-text-secondary);
+    font-size: var(--text-xl);
+    font-weight: 500;
+    padding: var(--space-3) var(--space-5);
+    transition: all 0.2s;
+    position: relative;
+  }
+
+  &:hover,
+  &:active,
+  &.active:link,
+  &.active:visited {
+    color: var(--color-text);
+    background-color: var(--color-surface-muted);
+    border-radius: var(--radius-sm);
+    &::before {
+      content: "";
+      width: 2px;
+      height: 65%;
+      background-color: var(--color-accent);
+      border-radius: var(--radius-md);
+      position: absolute;
+      left: 0;
+    }
+  }
+  & svg {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: var(--color-text);
+    transition: all 0.2s;
+  }
+  &:hover svg,
+  &:active svg,
+  &.active:link svg,
+  &.active:visited svg {
+    color: var(--color-accent);
+  }
+`;
+
+function SmallNav() {
+  return (
+    <nav>
+      <NavList>
+        <li>
+          <StyledNavList to="dashboard">
+            <HiOutlineSquares2X2 />
+          </StyledNavList>
+        </li>
+        <li>
+          <StyledNavList to="trades">
+            <HiOutlineListBullet />
+          </StyledNavList>
+        </li>
+        <li>
+          <StyledNavList to="stats">
+            <HiOutlineChartPie />
+          </StyledNavList>
+        </li>
+        <li>
+          <StyledNavList to="journal">
+            <HiOutlineBookOpen />
+          </StyledNavList>
+        </li>
+      </NavList>
+    </nav>
+  );
+}
+
+export default SmallNav;

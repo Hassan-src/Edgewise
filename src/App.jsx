@@ -4,11 +4,9 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { Toaster } from "react-hot-toast";
 
 import Account from "./pages/Account";
-import DailyTrades from "./pages/DailyTrades";
 import Dashboard from "./pages/Dashboard";
 import Journal from "./pages/Journal";
 import Login from "./pages/Login";
-import Settings from "./pages/Settings";
 import Stats from "./pages/Stats";
 import Trades from "./pages/Trades";
 import PageNotFound from "./pages/PageNotFound";
@@ -17,7 +15,7 @@ import AppLayout from "./ui/AppLayout";
 import GlobalStyles from "./styles/GlobalStyles";
 import ProtectedRoute from "./ui/ProtectedRoute";
 import Signup from "./pages/Signup";
-import { DarkModeProvider } from "./context/DarkModeContext";
+import { AppProvider } from "./context/AppContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -29,7 +27,7 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <DarkModeProvider>
+    <AppProvider>
       <QueryClientProvider client={queryClient}>
         <ReactQueryDevtools initialIsOpen={false} />
         <GlobalStyles />
@@ -45,11 +43,9 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="trades" element={<Trades />} />
-              <Route path="daily-trades" element={<DailyTrades />} />
               <Route path="stats" element={<Stats />} />
               <Route path="journal" element={<Journal />} />
               <Route path="account" element={<Account />} />
-              <Route path="settings" element={<Settings />} />
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
@@ -77,7 +73,7 @@ function App() {
           />
         </BrowserRouter>
       </QueryClientProvider>
-    </DarkModeProvider>
+    </AppProvider>
   );
 }
 

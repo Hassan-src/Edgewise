@@ -4,11 +4,14 @@ import imageSide from "/Logo-horizontal-light.svg";
 import imageSideDark from "/Logo-horizontal-dark.svg";
 import imageVertical from "/Logo-vertical-light.svg";
 import imageVerticalDark from "/Logo-vertical-dark.svg";
-
-import { useDarkMode } from "../context/useDarkMode";
+import symbolLight from "/LogoSymbolLight.svg";
+import symbolDark from "/LogoSymbolDark.svg";
+import { useAppMode } from "../context/useAppMode";
 
 const StyledLogo = styled.div`
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const Image = styled.img`
@@ -17,6 +20,12 @@ const Image = styled.img`
     css`
       height: 10rem;
       width: auto;
+    `}
+  ${(props) =>
+    props.$type === "SideBarSmall" &&
+    css`
+      width: 100%;
+      height: 3rem;
     `}
   ${(props) =>
     props.$type === "Header" &&
@@ -33,17 +42,20 @@ const Image = styled.img`
 `;
 
 function Logo({ $type = "SideBar" }) {
-  const { isDarkMode } = useDarkMode();
-  const srcLogin =
-    $type === "LogIn" && isDarkMode ? imageVerticalDark : imageVertical;
-  const srcSideBar =
-    $type === "SideBar" && isDarkMode ? imageSideDark : imageSide;
+  const { isDarkMode } = useAppMode();
+  const logos = {
+    SideBar: isDarkMode ? imageSideDark : imageSide,
+    SideBarSmall: isDarkMode ? symbolDark : symbolLight,
+    Header: isDarkMode ? imageSideDark : imageSide,
+    LogIn: isDarkMode ? imageVerticalDark : imageVertical,
+  };
+
   return (
     <StyledLogo>
       <Image
         fetchPriority="high"
-        src={$type === "LogIn" ? srcLogin : srcSideBar}
-        alt=""
+        src={logos[$type]}
+        alt="Edgewise logo"
         $type={$type}
       />
     </StyledLogo>

@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useDarkMode } from "../context/useDarkMode";
+import { useAppMode } from "../context/useAppMode";
 
 import profitLight from "/TrendProfitLight.svg";
 import profitDark from "/TrendProfitDark.svg";
@@ -26,13 +26,13 @@ const Image = styled.img`
       height: 50%;
       width: auto;
       position: absolute;
-      bottom: -8%;
+      bottom: -13%;
       left: 0;
     `}
 `;
 
 function TrendLine({ $type }) {
-  const { isDarkMode } = useDarkMode();
+  const { isDarkMode } = useAppMode();
   const srcProfit = $type === "Profit" && isDarkMode ? profitDark : profitLight;
   const srcLoss = $type === "Loss" && isDarkMode ? lossDark : lossLight;
   return (

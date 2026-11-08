@@ -2,8 +2,6 @@ import { NavLink } from "react-router-dom";
 import {
   HiOutlineBookOpen,
   HiOutlineChartPie,
-  HiOutlineClock,
-  HiOutlineCog6Tooth,
   HiOutlineListBullet,
   HiOutlineSquares2X2,
 } from "react-icons/hi2";
@@ -77,12 +75,6 @@ function MainNav() {
           </StyledNavList>
         </li>
         <li>
-          <StyledNavList to="daily-trades">
-            <HiOutlineClock />
-            <span>Daily Trades</span>
-          </StyledNavList>
-        </li>
-        <li>
           <StyledNavList to="stats">
             <HiOutlineChartPie />
             <span>Stats</span>
@@ -92,12 +84,6 @@ function MainNav() {
           <StyledNavList to="journal">
             <HiOutlineBookOpen />
             <span>Journal</span>
-          </StyledNavList>
-        </li>
-        <li>
-          <StyledNavList to="settings">
-            <HiOutlineCog6Tooth />
-            <span>Settings</span>
           </StyledNavList>
         </li>
       </NavList>

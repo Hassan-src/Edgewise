@@ -1,4 +1,3 @@
-import styled from "styled-components";
 import {
   HiOutlineArrowDown,
   HiOutlineArrowTrendingUp,
@@ -10,28 +9,14 @@ import MetricValue from "../../ui/MetricValue";
 import Head from "../../ui/CardHead";
 import Card from "../../ui/Card";
 import TrendLine from "../../ui/TrendLine";
+import Row from "../../ui/Row";
+import Chart from "../../ui/CardChart";
+import CardHelperInfo from "../../ui/CardHelperInfo";
+import CardInfo from "../../ui/CardInfo";
 
 import { useAccount } from "../Trades/useAccount";
 import { formatCurrency, formatPercentage } from "../../utils/helper";
 import { useAllTrades } from "./useAllTrades";
-import CardHelperInfo from "../../ui/CardHelperInfo";
-import Row from "../../ui/Row";
-
-const StyledNetTotal = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  gap: var(--space-3);
-  grid-area: 1 / 1;
-  z-index: 3;
-`;
-
-const Trend = styled.div`
-  width: 100%;
-  height: 100%;
-  grid-area: 1 / 1;
-  z-index: 2;
-`;
 
 function NetTotal() {
   const { account, isPending: isLoadingAccount } = useAccount();
@@ -51,7 +36,7 @@ function NetTotal() {
 
   return (
     <Card>
-      <StyledNetTotal>
+      <CardInfo $gap="medium">
         <Row $type="horizontalSticky" $gap="small">
           <Head>
             <HiOutlineArrowTrendingUp />
@@ -81,10 +66,10 @@ function NetTotal() {
             {formatPercentage(profitInPercentage)}
           </MetricValue>
         )}
-      </StyledNetTotal>
-      <Trend>
+      </CardInfo>
+      <Chart>
         <TrendLine $type={totalProfit > 0 ? "Profit" : "Loss"} />
-      </Trend>
+      </Chart>
     </Card>
   );
 }

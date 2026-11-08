@@ -44,7 +44,7 @@ export async function getTrades({
 export async function getAllTrades() {
   const { data, error } = await supabase
     .from("trades")
-    .select("close_time,net_profit");
+    .select("id,close_time,net_profit");
 
   if (error) throw new Error(error.message);
 

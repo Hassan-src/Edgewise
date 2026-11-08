@@ -120,8 +120,8 @@ const GlobalStyles = createGlobalStyle`
   --shadow-lg: 0 8px 24px rgb(0 0 0 / 0.30);
   --shadow-xl: 0 16px 48px rgb(0 0 0 / 0.40);
 
-  --image-grayscale: 10%;
-  --image-opacity: 90%;
+  /* --image-grayscale: 10%;
+  --image-opacity: 90%; */
   }
  }
 
