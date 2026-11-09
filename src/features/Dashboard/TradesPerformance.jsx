@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import NetTotal from "./NetTotal";
 import Expectancy from "./Expectancy";
 import TradeWinRatio from "./TradeWinRatio";

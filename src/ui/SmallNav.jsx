@@ -1,8 +1,6 @@
 import { NavLink } from "react-router-dom";
 import {
-  HiOutlineBookOpen,
-  HiOutlineChartPie,
-  HiOutlineCog6Tooth,
+  HiOutlineCalendarDays,
   HiOutlineListBullet,
   HiOutlineSquares2X2,
 } from "react-icons/hi2";
@@ -75,13 +73,8 @@ function SmallNav() {
           </StyledNavList>
         </li>
         <li>
-          <StyledNavList to="stats">
-            <HiOutlineChartPie />
-          </StyledNavList>
-        </li>
-        <li>
-          <StyledNavList to="journal">
-            <HiOutlineBookOpen />
+          <StyledNavList to="events">
+            <HiOutlineCalendarDays />
           </StyledNavList>
         </li>
       </NavList>

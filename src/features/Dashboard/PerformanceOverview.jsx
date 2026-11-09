@@ -1,7 +1,9 @@
 import styled from "styled-components";
+import { HiOutlinePresentationChartLine } from "react-icons/hi2";
+
 import Card from "../../ui/Card";
 import Head from "../../ui/CardHead";
-import { HiOutlinePresentationChartLine } from "react-icons/hi2";
+
 import PerformanceChart from "./PerformanceChart";
 import { useAllTrades } from "./useAllTrades";
 import PerformanceAccountDetails from "./PerformanceAccountDetails";

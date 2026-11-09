@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import MetricValue from "../../ui/MetricValue";
 import Row from "../../ui/Row";
+
 import { getTradePerformance } from "../../utils/getTradePerformance";
 import { formatCurrency } from "../../utils/helper";
 import { useAccount } from "../Trades/useAccount";

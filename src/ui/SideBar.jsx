@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import Logo from "./Logo";
-import MainNav from "./MainNav";
 import { HiOutlineCodeBracketSquare } from "react-icons/hi2";
+
+import MainNav from "./MainNav";
 import ButtonIcon from "./ButtonIcon";
 import { useAppMode } from "../context/useAppMode";
 import SmallNav from "./SmallNav";
@@ -38,7 +38,6 @@ function SideBar() {
         <ButtonIcon onClick={handleResize}>
           <HiOutlineCodeBracketSquare />
         </ButtonIcon>
-        {resize ? <Logo /> : <Logo $type="SideBarSmall" />}
       </SideBarTop>
       <NavBar>{resize ? <MainNav /> : <SmallNav />}</NavBar>
     </StyledSideBar>

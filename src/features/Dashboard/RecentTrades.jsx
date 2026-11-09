@@ -1,13 +1,15 @@
-import styled from "styled-components";
-import Card from "../../ui/Card";
-import Head from "../../ui/CardHead";
 import {
   HiOutlineArrowSmallRight,
   HiOutlineClipboardDocumentList,
 } from "react-icons/hi2";
-import RecentTradesTable from "./RecentTradesTable";
+import styled from "styled-components";
+
+import Card from "../../ui/Card";
+import Head from "../../ui/CardHead";
 import Row from "../../ui/Row";
 import TextLink from "../../ui/TextLink";
+
+import RecentTradesTable from "./RecentTradesTable";
 
 const StyledPerformanceOverview = styled.div`
   display: grid;

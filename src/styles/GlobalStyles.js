@@ -72,7 +72,7 @@ const GlobalStyles = createGlobalStyle`
   --color-loss: #D14343;
   --color-loss-transparent: rgb(209, 67, 67, 0.2);
   --color-warning: #B7791F;
-
+  --color-warning-transparent: rgb(183, 121, 31, 0.2);
   /* Shadows */
   --shadow-sm: 0 1px 2px rgb(15 23 42 / 0.04);
   --shadow-md: 0 4px 12px rgb(15 23 42 / 0.06);
@@ -113,7 +113,7 @@ const GlobalStyles = createGlobalStyle`
   --color-loss: #FF5C5C;
   --color-loss-transparent: rgb(255, 92, 92,0.2);
   --color-warning: #F2C36B;
-
+  --color-warning-transparent: rgb(242, 195, 107,0.2);
   /* Shadows */
   --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.12);
   --shadow-md: 0 4px 12px rgb(0 0 0 / 0.20);

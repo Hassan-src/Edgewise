@@ -1,4 +1,5 @@
 import styled from "styled-components";
+
 import TradesPerformance from "./TradesPerformance";
 import PerformanceOverview from "./PerformanceOverview";
 import RecentTrades from "./RecentTrades";

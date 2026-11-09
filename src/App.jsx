@@ -5,15 +5,14 @@ import { Toaster } from "react-hot-toast";
 
 import Account from "./pages/Account";
 import Dashboard from "./pages/Dashboard";
-import Journal from "./pages/Journal";
 import Login from "./pages/Login";
-import Stats from "./pages/Stats";
 import Trades from "./pages/Trades";
 import PageNotFound from "./pages/PageNotFound";
+import EventsCalendar from "./pages/EconomicEvents";
 import AppLayout from "./ui/AppLayout";
+import ProtectedRoute from "./ui/ProtectedRoute";
 
 import GlobalStyles from "./styles/GlobalStyles";
-import ProtectedRoute from "./ui/ProtectedRoute";
 import Signup from "./pages/Signup";
 import { AppProvider } from "./context/AppContext";
 
@@ -43,8 +42,7 @@ function App() {
               <Route index element={<Navigate replace to="dashboard" />} />
               <Route path="dashboard" element={<Dashboard />} />
               <Route path="trades" element={<Trades />} />
-              <Route path="stats" element={<Stats />} />
-              <Route path="journal" element={<Journal />} />
+              <Route path="events" element={<EventsCalendar />} />
               <Route path="account" element={<Account />} />
             </Route>
             <Route path="login" element={<Login />} />

@@ -1,22 +1,24 @@
 import { HiOutlinePencil, HiOutlineTrash } from "react-icons/hi2";
 import styled, { css } from "styled-components";
+import { format } from "date-fns";
 
-import CreateTradeForm from "./CreateTradeForm";
 import MetricValue from "../../ui/MetricValue";
 import Modal from "../../ui/Modal";
 import ConfirmDelete from "../../ui/ConfirmDelete";
-import { useDeleteTrade } from "./useDeleteTrade";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 
+import CreateTradeForm from "./CreateTradeForm";
+import { useDeleteTrade } from "./useDeleteTrade";
+
 const $dir = {
   buy: css`
-    background-color: var(--color-profit);
-    color: var(--color-text-on-accent);
+    background-color: var(--color-profit-transparent);
+    color: var(--color-profit);
   `,
   sell: css`
-    background-color: var(--color-loss);
-    color: var(--color-text-light);
+    background-color: var(--color-loss-transparent);
+    color: var(--color-loss);
   `,
 };
 
@@ -30,7 +32,7 @@ const $src = {
   `,
 };
 
-const Date = styled.div`
+const TradeDate = styled.div`
   font-family: var(--font-mono);
   font-weight: 500;
   font-size: var(--text-lg);
@@ -77,10 +79,12 @@ function TradesRow({ trade }) {
     source,
     side: direction,
   } = trade;
-  const date = open_time.slice(0, 10);
+  const date = format(new Date(open_time), "yyyy-MM-dd h:mma")
+    .replace("AM", "am")
+    .replace("PM", "pm");
   return (
     <Table.Row>
-      <Date>{date}</Date>
+      <TradeDate>{date}</TradeDate>
       <Symbol>{symbol}</Symbol>
       <Direction $dir={direction === "buy" ? "buy" : "sell"}>
         {direction}

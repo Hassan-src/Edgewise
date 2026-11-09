@@ -1,6 +1,8 @@
 import styled from "styled-components";
+
 import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
+import Logo from "./Logo";
 
 const StyledHeader = styled.header`
   background-color: var(--color-surface);
@@ -8,13 +10,14 @@ const StyledHeader = styled.header`
   border-bottom: 1px solid var(--color-border);
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   gap: var(--space-8);
 `;
 
 function Header() {
   return (
     <StyledHeader>
+      <Logo $type="Header" />
       <UserAvatar />
       <HeaderMenu />
     </StyledHeader>

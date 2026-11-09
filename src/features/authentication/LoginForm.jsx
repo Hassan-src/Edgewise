@@ -32,8 +32,8 @@ const P = styled.p`
 `;
 
 function LoginForm() {
-  const [email, setEmail] = useState("hassane2880@gmail.com");
-  const [password, setPassword] = useState("13712345");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const { login, isPending } = useLogin();
   function handleSubmit(e) {
     e.preventDefault();

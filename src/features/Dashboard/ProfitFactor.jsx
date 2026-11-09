@@ -1,15 +1,17 @@
+import { HiOutlineScale } from "react-icons/hi2";
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+
 import Card from "../../ui/Card";
 import Head from "../../ui/CardHead";
-import { HiOutlineScale } from "react-icons/hi2";
-import { useAllTrades } from "./useAllTrades";
 import MetricValue from "../../ui/MetricValue";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import CardInfo from "../../ui/CardInfo";
 import Chart from "../../ui/CardChart";
 import Row from "../../ui/Row";
 import CardFooter from "../../ui/CardFooter";
 import Loading from "../../ui/Loading";
 import CardHelperInfo from "../../ui/CardHelperInfo";
+
+import { useAllTrades } from "./useAllTrades";
 
 function ProfitFactor() {
   const { trades, isPending: isLoadingTrades } = useAllTrades();

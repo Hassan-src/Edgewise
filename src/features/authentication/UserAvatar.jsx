@@ -1,5 +1,7 @@
 import styled from "styled-components";
+
 import { useUser } from "./useUser";
+
 import Avatar from "../../ui/Avatar";
 
 const StyledUserAvater = styled.div`

@@ -1,10 +1,12 @@
 import TradesRow from "./TradesRow";
+
 import Loading from "../../ui/Loading";
-import { useTrades } from "./useTrades";
 import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import Pagination from "../../ui/Pagination";
+
 import { useAccount } from "./useAccount";
+import { useTrades } from "./useTrades";
 
 function TradesTable() {
   const { isPending: tradesLoading, trades, count } = useTrades();

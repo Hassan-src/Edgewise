@@ -1,9 +1,9 @@
 import { HiOutlinePlus } from "react-icons/hi2";
 
 import Button from "../../ui/Buttons";
+import Modal from "../../ui/Modal";
 
 import CreateTradeForm from "./CreateTradeForm";
-import Modal from "../../ui/Modal";
 
 function AddTrade() {
   return (

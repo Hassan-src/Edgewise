@@ -1,16 +1,18 @@
+import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
+import { HiOutlinePercentBadge } from "react-icons/hi2";
+
 import Card from "../../ui/Card";
 import Head from "../../ui/CardHead";
-import { HiOutlinePercentBadge } from "react-icons/hi2";
-import { useAllTrades } from "./useAllTrades";
 import MetricValue from "../../ui/MetricValue";
-import { formatPercentage } from "../../utils/helper";
-import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import CardInfo from "../../ui/CardInfo";
 import Chart from "../../ui/CardChart";
 import CardFooter from "../../ui/CardFooter";
 import Row from "../../ui/Row";
 import Loading from "../../ui/Loading";
 import CardHelperInfo from "../../ui/CardHelperInfo";
+
+import { formatPercentage } from "../../utils/helper";
+import { useAllTrades } from "./useAllTrades";
 
 function TradeWinRatio() {
   const { trades, isPending: isLoadingTrades } = useAllTrades();

@@ -1,5 +1,7 @@
 import styled from "styled-components";
+
 import { formatCurrency } from "../../utils/helper";
+
 import MetricValue from "../../ui/MetricValue";
 
 const StyledChartToolTip = styled.div`

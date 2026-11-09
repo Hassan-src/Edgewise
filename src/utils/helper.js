@@ -3,4 +3,4 @@ export const formatCurrency = (value) =>
     value,
   );
 
-export const formatPercentage = (value) => value.toFixed(2) + "%";
+export const formatPercentage = (value) => value?.toFixed(2) + "%";
