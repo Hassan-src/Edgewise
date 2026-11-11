@@ -48,7 +48,7 @@ function App() {
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
-            <Route path="verify" element={<VerifyEmail />} />
+            <Route path="verify-email" element={<VerifyEmail />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster
