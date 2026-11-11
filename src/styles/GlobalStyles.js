@@ -6,16 +6,17 @@ const GlobalStyles = createGlobalStyle`
   --font-sans: "Inter", sans-serif;
   --font-mono: "Geist Mono", monospace;
 
-  --text-xs: 0.75rem;
-  --text-sm: 0.875rem;
-  --text-base: 1rem;
-  --text-lg: 1.125rem;
-  --text-xl: 1.25rem;
-  --text-2xl: 1.5rem;
-  --text-3xl: 1.875rem;
-  --text-4xl: 2.25rem;
-  --text-5xl: 2.375rem;
-  --text-6xl: 2.5rem;
+   --text-xs: clamp(0.7rem, 0.68rem + 0.1vw, 0.75rem);
+  --text-sm: clamp(0.8rem, 0.77rem + 0.15vw, 0.875rem);
+  --text-base: clamp(0.875rem, 0.83rem + 0.2vw, 1rem);
+  --text-lg: clamp(1rem, 0.96rem + 0.2vw, 1.125rem);
+  --text-xl: clamp(1.125rem, 1.08rem + 0.25vw, 1.25rem);
+  --text-2xl: clamp(1.25rem, 1.15rem + 0.4vw, 1.5rem);
+  --text-3xl: clamp(1.5rem, 1.35rem + 0.6vw, 1.875rem);
+  --text-4xl: clamp(1.75rem, 1.55rem + 0.8vw, 2.25rem);
+  --text-5xl: clamp(2rem, 1.8rem + 0.8vw, 2.375rem);
+  --text-6xl: clamp(2.125rem, 1.9rem + 1vw, 2.5rem);
+  
 
   /* Spacing: 4px base */
   --space-1: 0.25rem;

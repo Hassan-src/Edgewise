@@ -15,7 +15,7 @@ function EconomicTable() {
   return (
     <Table columns="0.2fr 0.1fr 0.1fr 0.5fr 0.1fr 0.1fr">
       <Table.Header role="row">
-        <div>Date</div>
+        <div>Time</div>
         <div>Currency</div>
         <div>Impact</div>
         <div>Event Type</div>

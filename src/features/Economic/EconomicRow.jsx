@@ -97,7 +97,7 @@ const Source = styled.div`
 `;
 
 function EconomicRow({ event }) {
-  const date = format(new Date(event.time), "EEEE d h:mma");
+  const date = format(new Date(event.time), "h:mma");
   const formattedDate = date.replace("AM", "am").replace("PM", "pm");
   return (
     <Table.Row>
