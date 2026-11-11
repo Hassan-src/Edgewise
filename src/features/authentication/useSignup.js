@@ -13,7 +13,10 @@ export function useSignup() {
         navigate("/dashboard", { replace: true });
       } else {
         toast.success("Account created! Please verify your email.");
-        navigate("/login", { replace: true });
+        navigate("/verify-email", {
+          state: { email: data.email },
+          replace: true,
+        });
       }
     },
     onError: (error) => toast.error(error.message),

@@ -15,6 +15,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import GlobalStyles from "./styles/GlobalStyles";
 import Signup from "./pages/Signup";
 import { AppProvider } from "./context/AppContext";
+import VerifyEmail from "./pages/VerifyEmail";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,6 +48,7 @@ function App() {
             </Route>
             <Route path="login" element={<Login />} />
             <Route path="signup" element={<Signup />} />
+            <Route path="verify" element={<VerifyEmail />} />
             <Route path="*" element={<PageNotFound />} />
           </Routes>
           <Toaster

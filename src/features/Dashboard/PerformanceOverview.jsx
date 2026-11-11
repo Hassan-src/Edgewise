@@ -22,7 +22,7 @@ function PerformanceOverview() {
 
   return (
     <StyledPerformanceOverview>
-      <Card>
+      <Card $gap="large">
         <Head>
           <HiOutlinePresentationChartLine />
           Performance overview
