@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledFormRow = styled.div`
   display: grid;
@@ -9,11 +9,13 @@ const StyledFormRow = styled.div`
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-border);
   }
-  &:has(button) {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--space-3);
-  }
+  ${(props) =>
+    props.$type === "action" &&
+    css`
+      display: flex;
+      justify-content: flex-end;
+      gap: var(--space-3);
+    `}
 `;
 
 const Label = styled.label`
@@ -25,10 +27,10 @@ const Error = styled.span`
   color: var(--color-error-dark);
 `;
 
-function FormRow({ label, error, children }) {
+function FormRow({ label, error, children, id, $type }) {
   return (
-    <StyledFormRow>
-      {label && <Label htmlFor={children.props.id}>{label}:</Label>}
+    <StyledFormRow $type={$type}>
+      {label && <Label htmlFor={id}>{label}:</Label>}
       {children}
       {error && <Error>{error}</Error>}
     </StyledFormRow>

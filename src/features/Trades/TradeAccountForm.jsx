@@ -33,7 +33,11 @@ function TradeAccountForm({ onCloseModal }) {
           {...register("strategy_name")}
         />
       </FormRow>
-      <FormRow label="Initial balance" error={errors?.initial_balance?.message}>
+      <FormRow
+        label="Initial balance"
+        error={errors?.initial_balance?.message}
+        id="initial_balance"
+      >
         <Input
           type="number"
           id="initial_balance"
@@ -46,10 +50,10 @@ function TradeAccountForm({ onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="Currency">
-        <Input type="text" value="USD" disabled />
+      <FormRow label="Currency" id="currency">
+        <Input id="currency" type="text" value="USD" disabled />
       </FormRow>
-      <FormRow>
+      <FormRow $type="action">
         <Button
           $variation="secondary"
           $size="medium"

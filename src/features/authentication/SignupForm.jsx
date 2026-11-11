@@ -11,6 +11,7 @@ import Button from "../../ui/Buttons";
 import TextLink from "../../ui/TextLink";
 
 import { useSignup } from "./useSignup";
+import InputPassword from "../../ui/InputPassword";
 
 const StyledSignupForm = styled.div`
   max-width: 100%;
@@ -45,7 +46,11 @@ function SignupForm() {
         <P>Sign up to get access to all the features.</P>
       </Row>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="username" error={errors?.userName?.message}>
+        <FormRow
+          label="username"
+          error={errors?.userName?.message}
+          id="userName"
+        >
           <Input
             $size="medium"
             type="text"
@@ -55,7 +60,7 @@ function SignupForm() {
             {...register("userName", { required: "This field is required" })}
           />
         </FormRow>
-        <FormRow label="email" error={errors?.email?.message}>
+        <FormRow label="email" error={errors?.email?.message} id="email">
           <Input
             $size="medium"
             type="email"
@@ -70,8 +75,12 @@ function SignupForm() {
             })}
           />
         </FormRow>
-        <FormRow label="password" error={errors?.password?.message}>
-          <Input
+        <FormRow
+          label="password"
+          error={errors?.password?.message}
+          id="password"
+        >
+          <InputPassword
             $size="medium"
             type="password"
             id="password"
@@ -89,8 +98,9 @@ function SignupForm() {
         <FormRow
           label="repeat password"
           error={errors?.passwordConfirm?.message}
+          id="passwordConfirm"
         >
-          <Input
+          <InputPassword
             $size="medium"
             type="password"
             id="passwordConfirm"
@@ -102,7 +112,7 @@ function SignupForm() {
             })}
           />
         </FormRow>
-        <FormRow $gap="button">
+        <FormRow $gap="button" $type="action">
           <Button $variation="primary" $size="large" disabled={isSubmitting}>
             Sign up
           </Button>

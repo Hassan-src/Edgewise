@@ -13,6 +13,7 @@ import Row from "../../ui/Row";
 import SpinnerMini from "../../ui/SpinnerMini";
 import TextLink from "../../ui/TextLink";
 import FormRow from "../../ui/FormRow";
+import InputPassword from "../../ui/InputPassword";
 
 const StyledLoginForm = styled.div`
   max-width: 100%;
@@ -55,7 +56,7 @@ function LoginForm() {
         <P>Enter your credentials to access your account.</P>
       </Row>
       <Form $type="regular" onSubmit={handleSubmit}>
-        <FormRowVertical label="Email address">
+        <FormRowVertical label="Email address" id="email">
           <Input
             type="email"
             id="email"
@@ -65,8 +66,8 @@ function LoginForm() {
             disabled={isPending}
           />
         </FormRowVertical>
-        <FormRowVertical label="password">
-          <Input
+        <FormRowVertical label="password" id="password">
+          <InputPassword
             type="password"
             id="password"
             autoComplete="corrent-password"
@@ -75,7 +76,7 @@ function LoginForm() {
             disabled={isPending}
           />
         </FormRowVertical>
-        <FormRow>
+        <FormRow $type="action">
           <Button $variation="primary" $size="large" disabled={isPending}>
             {!isPending ? "Login" : <SpinnerMini />}
           </Button>

@@ -63,7 +63,7 @@ function ImportTradesForm({ onCloseModal }) {
         error={errors?.file?.message}
         $type={onCloseModal ? "modal" : "regular"}
       >
-        <FormRow label="Report">
+        <FormRow label="Report" id="file">
           <FileInput
             id="file"
             accept=".xlsx"
@@ -74,7 +74,7 @@ function ImportTradesForm({ onCloseModal }) {
             disabled={rows.length > 0}
           />
         </FormRow>
-        <FormRow>
+        <FormRow $type="action">
           <Button
             $variation="secondary"
             $size="medium"

@@ -5,10 +5,10 @@ import Row from "../../ui/Row";
 import Heading from "../../ui/Heading";
 import SecondaryText from "../../ui/SecondaryText";
 import FormRow from "../../ui/FormRow";
-import Input from "../../ui/Input";
 import Button from "../../ui/Buttons";
 
 import { useUpdateUser } from "./useUpdateUser";
+import InputPassword from "../../ui/InputPassword";
 
 function UpdateUserPasswordForm() {
   const { register, handleSubmit, formState, getValues, reset } = useForm();
@@ -26,11 +26,15 @@ function UpdateUserPasswordForm() {
         <SecondaryText>Modify your current password</SecondaryText>
       </Row>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormRow label="New password" error={errors?.password?.message}>
-          <Input
+        <FormRow
+          label="New password"
+          id="password"
+          error={errors?.password?.message}
+        >
+          <InputPassword
             type="password"
             id="password"
-            autoComplete="current-password"
+            autoComplete="new-password"
             disabled={isUpdating}
             placeholder="min 8 characters"
             {...register("password", {
@@ -44,9 +48,10 @@ function UpdateUserPasswordForm() {
         </FormRow>
         <FormRow
           label="Repeat password"
+          id="passwordConfirm"
           error={errors?.passwordConfirm?.message}
         >
-          <Input
+          <InputPassword
             type="password"
             id="passwordConfirm"
             autoComplete="new-password"
@@ -59,7 +64,7 @@ function UpdateUserPasswordForm() {
             })}
           />
         </FormRow>
-        <FormRow>
+        <FormRow $type="action">
           <Button
             $variation="secondary"
             $size="medium"

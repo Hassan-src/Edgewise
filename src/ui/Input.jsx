@@ -10,6 +10,8 @@ const $size = {
 };
 
 const Input = styled.input`
+  width: 100%;
+  min-width: 0;
   background-color: var(--color-surface-muted);
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);

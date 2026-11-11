@@ -84,10 +84,10 @@ function UpdateUserDataForm() {
             <P>Profile picture must be PNG,JPEG under 20mb</P>
           </Row>
         </Row>
-        <FormRow label="Email">
-          <Input value={email} disabled />
+        <FormRow label="Email" id="email">
+          <Input id="email" value={email} disabled />
         </FormRow>
-        <FormRow label="Username">
+        <FormRow label="Username" id="userName">
           <Input
             type="text"
             value={userName}
@@ -96,18 +96,18 @@ function UpdateUserDataForm() {
             onChange={(e) => setUserName(e.target.value)}
           />
         </FormRow>
-        <FormRow label="uploaded image">
+        <FormRow label="uploaded image" id="file">
           <Input
             value={
               avatar
                 ? `${avatar.name} (${(avatar.size / 1024 / 1024).toFixed(2)} MB)`
                 : "No file chosen"
             }
-            id="userName"
+            id="file"
             disabled
           />
         </FormRow>
-        <FormRow>
+        <FormRow $type="action">
           <Button
             type="reset"
             $variation="secondary"

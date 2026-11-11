@@ -65,7 +65,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit)}
       $type={onCloseModal ? "modal" : "regular"}
     >
-      <FormRow label="open Time" error={errors?.open_time?.message}>
+      <FormRow
+        label="open Time"
+        error={errors?.open_time?.message}
+        id="open_time"
+      >
         <Input
           type="datetime-local"
           step="1"
@@ -74,7 +78,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           {...register("open_time", { required: "Required field" })}
         />
       </FormRow>
-      <FormRow label="close Time" error={errors?.close_time?.message}>
+      <FormRow
+        label="close Time"
+        error={errors?.close_time?.message}
+        id="close_time"
+      >
         <Input
           type="datetime-local"
           step="1"
@@ -83,7 +91,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           {...register("close_time", { required: "Required field" })}
         />
       </FormRow>
-      <FormRow label="symbol" error={errors?.symbol?.message}>
+      <FormRow label="symbol" error={errors?.symbol?.message} id="symbol">
         <Input
           $size="small"
           type="text"
@@ -96,18 +104,19 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="direction" error={errors?.side?.message}>
+      <FormRow label="direction" error={errors?.side?.message} id="direction">
         <Select
           {...register("side", {
             required: "Required field",
           })}
+          id="direction"
           disabled={isWorking}
         >
           <option value="buy">buy</option>
           <option value="sell">sell</option>
         </Select>
       </FormRow>
-      <FormRow label="volume" error={errors?.volume?.message}>
+      <FormRow label="volume" error={errors?.volume?.message} id="volume">
         <Input
           $size="small"
           type="number"
@@ -124,7 +133,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="open Price" error={errors?.open_price?.message}>
+      <FormRow
+        label="open Price"
+        error={errors?.open_price?.message}
+        id="open_price"
+      >
         <Input
           type="number"
           id="open_price"
@@ -138,7 +151,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="stop / loss" error={errors?.stop_loss?.message}>
+      <FormRow
+        label="stop / loss"
+        error={errors?.stop_loss?.message}
+        id="stop_loss"
+      >
         <Input
           type="number"
           id="stop_loss"
@@ -149,7 +166,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           {...register("stop_loss", { valueAsNumber: true })}
         />
       </FormRow>
-      <FormRow label="take profit" error={errors?.take_profit?.message}>
+      <FormRow
+        label="take profit"
+        error={errors?.take_profit?.message}
+        id="take_profit"
+      >
         <Input
           type="number"
           id="take_profit"
@@ -160,7 +181,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           {...register("take_profit", { valueAsNumber: true })}
         />
       </FormRow>
-      <FormRow label="close Price" error={errors?.close_price?.message}>
+      <FormRow
+        label="close Price"
+        error={errors?.close_price?.message}
+        id="close_price"
+      >
         <Input
           type="number"
           id="close_price"
@@ -173,7 +198,11 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="commission" error={errors?.commission?.message}>
+      <FormRow
+        label="commission"
+        error={errors?.commission?.message}
+        id="commission"
+      >
         <Input
           $size="small"
           type="number"
@@ -191,7 +220,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="swap" error={errors?.swap?.message}>
+      <FormRow label="swap" error={errors?.swap?.message} id="swap">
         <Input
           $size="small"
           type="number"
@@ -209,7 +238,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="fee" error={errors?.fee?.message}>
+      <FormRow label="fee" error={errors?.fee?.message} id="fee">
         <Input
           $size="small"
           type="number"
@@ -227,7 +256,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="profit" error={errors?.profit?.message}>
+      <FormRow label="profit" error={errors?.profit?.message} id="profit">
         <Input
           $size="small"
           type="number"
@@ -241,7 +270,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           })}
         />
       </FormRow>
-      <FormRow label="Note" error={errors?.notes?.message}>
+      <FormRow label="Note" error={errors?.notes?.message} id="notes">
         <Textarea
           $size="small"
           type="textaria"
@@ -253,7 +282,7 @@ function CreateTradeForm({ editTrade = {}, onCloseModal }) {
           {...register("notes")}
         />
       </FormRow>
-      <FormRow>
+      <FormRow $type="action">
         <Button
           $variation="secondary"
           $size="medium"
