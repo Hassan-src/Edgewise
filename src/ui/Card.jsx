@@ -23,6 +23,12 @@ const StyledCard = styled.div`
   position: relative;
   overflow: hidden;
   ${(props) => $gap[props.$gap]}
+  @media (max-width: 950px) {
+    padding: var(--space-3);
+  }
+  @media (max-width: 650px) {
+    padding: var(--space-2);
+  }
 `;
 
 function Card({ $columns, children, $gap }) {

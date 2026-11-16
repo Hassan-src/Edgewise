@@ -57,19 +57,33 @@ function PerformanceAccountDetails() {
   const totalPnL = data.at(-1)?.cumulativePnL ?? 0;
   const currentBalance = initialBalance + totalPnL;
   return (
-    <Row $type="horizontal">
-      <AccountDetails>
-        <DetailName>Cumulative P&L</DetailName>
-        {totalPnL > 0 ? (
-          <MetricValue $size="cardMain" $status="profit">
-            {formatCurrency(totalPnL)}
-          </MetricValue>
-        ) : (
-          <MetricValue $size="cardMain" $status="loss">
-            {formatCurrency(totalPnL)}
-          </MetricValue>
-        )}
-      </AccountDetails>
+    <>
+      <Row $type="horizontal" $responsive="750px">
+        <AccountDetails>
+          <DetailName>Cumulative P&L</DetailName>
+          {totalPnL > 0 ? (
+            <MetricValue $size="cardMain" $status="profit">
+              {formatCurrency(totalPnL)}
+            </MetricValue>
+          ) : (
+            <MetricValue $size="cardMain" $status="loss">
+              {formatCurrency(totalPnL)}
+            </MetricValue>
+          )}
+        </AccountDetails>
+        <AccountDetails>
+          <DetailName>Account Balance</DetailName>
+          {currentBalance > initialBalance ? (
+            <MetricValue $size="cardMain" $status="profit">
+              {formatCurrency(currentBalance)}
+            </MetricValue>
+          ) : (
+            <MetricValue $size="cardMain" $status="loss">
+              {formatCurrency(currentBalance)}
+            </MetricValue>
+          )}
+        </AccountDetails>
+      </Row>
       <ChartLegend>
         <LegendItem>
           <LegendDot $color="var(--color-profit)" />
@@ -80,19 +94,7 @@ function PerformanceAccountDetails() {
           Cumulative P&L
         </LegendItem>
       </ChartLegend>
-      <AccountDetails>
-        <DetailName>Account Balance</DetailName>
-        {currentBalance > initialBalance ? (
-          <MetricValue $size="cardMain" $status="profit">
-            {formatCurrency(currentBalance)}
-          </MetricValue>
-        ) : (
-          <MetricValue $size="cardMain" $status="loss">
-            {formatCurrency(currentBalance)}
-          </MetricValue>
-        )}
-      </AccountDetails>
-    </Row>
+    </>
   );
 }
 

@@ -13,6 +13,17 @@ const StyledSideBar = styled.div`
   grid-row: 1 /-1;
   display: flex;
   flex-direction: column;
+  @media (max-width: 950px) {
+    border-radius: var(--radius-full);
+    border: 1px solid var(--color-border);
+    padding: var(--space-3) var(--space-3);
+    flex-direction: row;
+    position: absolute;
+    z-index: 999;
+    bottom: 8%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+  }
 `;
 
 const SideBarTop = styled.div`
@@ -20,6 +31,9 @@ const SideBarTop = styled.div`
   align-items: center;
   flex-direction: column;
   gap: var(--space-5);
+  @media (max-width: 950px) {
+    display: none;
+  }
 `;
 
 const NavBar = styled.div`

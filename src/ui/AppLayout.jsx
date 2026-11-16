@@ -11,11 +11,19 @@ const StyledAppLayout = styled.div`
     props.$sideType === "expand" ? "16rem 1fr" : "5rem 1fr"};
   grid-template-rows: auto minmax(0, 1fr);
   height: 100dvh;
+  position: relative;
+  @media (max-width: 950px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      "header"
+      "main";
+  }
 `;
 
 const Main = styled.main`
   padding: var(--space-16) 0 var(--space-16);
-  overflow-x: scroll;
+  overflow-x: auto;
   &::-webkit-scrollbar {
     width: 8px;
   }
@@ -26,14 +34,25 @@ const Main = styled.main`
     background: var(--color-scroll-thumb);
     border-radius: 4px;
   }
+  @media (max-width: 950px) {
+    padding: var(--space-8) 0 var(--space-8);
+    grid-area: main;
+  }
+  @media (max-width: 800px) {
+    padding: var(--space-8) 0 0;
+  }
 `;
 
 const Container = styled.div`
-  max-width: 85%;
+  width: 85%;
+  max-width: 90rem;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   gap: var(--space-5);
+  @media (max-width: 950px) {
+    width: 92%;
+  }
 `;
 
 function AppLayout() {

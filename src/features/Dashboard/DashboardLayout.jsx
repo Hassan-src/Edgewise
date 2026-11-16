@@ -5,9 +5,14 @@ import PerformanceOverview from "./PerformanceOverview";
 import RecentTrades from "./RecentTrades";
 
 const StyledDashboardLayout = styled.div`
+  width: 100%;
+  min-width: 0;
   display: grid;
   grid-template-rows: 12rem auto auto;
   gap: var(--space-4);
+  & > * {
+    min-width: 0;
+  }
   @media (max-width: 1600px) {
     grid-template-rows: repeat(3, auto);
   }

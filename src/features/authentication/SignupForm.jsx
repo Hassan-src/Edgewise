@@ -14,10 +14,11 @@ import { useSignup } from "./useSignup";
 import InputPassword from "../../ui/InputPassword";
 
 const StyledSignupForm = styled.div`
-  max-width: 100%;
-  max-height: 100%;
+  width: 100%;
+  min-width: 0;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
   background-color: var(--color-surface);
   border: 3px solid var(--color-border);
   border-radius: var(--radius-md);

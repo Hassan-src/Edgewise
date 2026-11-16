@@ -20,7 +20,7 @@ function RecentTrades() {
   return (
     <StyledPerformanceOverview>
       <Card>
-        <Row $type="horizontal">
+        <Row $type="horizontal" $marginBottom="large">
           <Head>
             <HiOutlineClipboardDocumentList />
             Recent Trades
@@ -32,7 +32,6 @@ function RecentTrades() {
             icon={<HiOutlineArrowSmallRight />}
           />
         </Row>
-        <br />
         <RecentTradesTable />
       </Card>
     </StyledPerformanceOverview>

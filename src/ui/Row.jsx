@@ -54,6 +54,15 @@ const Row = styled.div`
     `}
   ${(props) => $gap[props.$gap]}
   ${(props) => $marginBottom[props.$marginBottom]}
+  ${(props) =>
+    props.$responsive &&
+    css`
+      @media (max-width: ${props.$responsive}) {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--space-3);
+      }
+    `}
 `;
 
 export default Row;

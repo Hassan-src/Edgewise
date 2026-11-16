@@ -12,6 +12,9 @@ const StyledHeader = styled.header`
   align-items: center;
   justify-content: space-between;
   gap: var(--space-8);
+  @media (max-width: 950px) {
+    grid-area: header;
+  }
 `;
 
 function Header() {
