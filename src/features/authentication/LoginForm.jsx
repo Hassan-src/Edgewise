@@ -26,6 +26,7 @@ const StyledLoginForm = styled.div`
   border-radius: var(--radius-md);
   padding: var(--space-8);
   gap: var(--space-6);
+  overflow: hidden;
 
   @media (max-width: 1000px) {
     padding: var(--space-6);
