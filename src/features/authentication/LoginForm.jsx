@@ -40,7 +40,6 @@ const StyledLoginForm = styled.div`
   }
 
   @media (max-width: 500px) {
-    padding: var(--space-6) var(--space-4);
     gap: var(--space-4);
   }
 `;
