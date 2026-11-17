@@ -10,6 +10,11 @@ const LogIn = styled.main`
   justify-content: center;
   background-color: var(--color-bg);
   padding: var(--space-6) var(--space-4);
+  @media (max-width: 900px) {
+    width: 100dvw;
+    min-height: 100dvh;
+    padding: 0;
+  }
 `;
 
 function Login() {

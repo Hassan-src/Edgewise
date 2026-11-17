@@ -25,7 +25,24 @@ const StyledLoginForm = styled.div`
   border: 3px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-8);
-  gap: var(--space-8);
+  gap: var(--space-6);
+
+  @media (max-width: 1000px) {
+    padding: var(--space-6);
+    gap: var(--space-5);
+  }
+
+  @media (max-width: 900px) {
+    min-height: 100dvh;
+    border: none;
+    border-radius: 0;
+    justify-content: center;
+  }
+
+  @media (max-width: 500px) {
+    padding: var(--space-6) var(--space-4);
+    gap: var(--space-4);
+  }
 `;
 
 const P = styled.p`

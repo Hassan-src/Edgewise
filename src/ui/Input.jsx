@@ -6,6 +6,9 @@ const $size = {
   `,
   medium: css`
     width: 20rem;
+    @media (max-width: 900px) {
+      width: 100%;
+    }
   `,
 };
 

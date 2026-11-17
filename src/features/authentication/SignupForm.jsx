@@ -23,7 +23,25 @@ const StyledSignupForm = styled.div`
   border: 3px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-8);
-  gap: var(--space-8);
+  gap: var(--space-6);
+  overflow-x: auto;
+
+  @media (max-width: 1000px) {
+    padding: var(--space-6);
+    gap: var(--space-5);
+  }
+
+  @media (max-width: 900px) {
+    min-height: 100dvh;
+    border: none;
+    border-radius: 0;
+    justify-content: flex-start;
+  }
+
+  @media (max-width: 500px) {
+    padding: var(--space-6) var(--space-4);
+    gap: var(--space-4);
+  }
 `;
 
 const P = styled.p`
@@ -46,7 +64,7 @@ function SignupForm() {
         <Heading $as="h4">Sign up</Heading>
         <P>Sign up to get access to all the features.</P>
       </Row>
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      <Form $type="regular" onSubmit={handleSubmit(onSubmit)}>
         <FormRow
           label="username"
           error={errors?.userName?.message}

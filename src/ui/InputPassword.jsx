@@ -8,11 +8,13 @@ const $size = {
   `,
   medium: css`
     width: 20rem;
+    @media (max-width: 900px) {
+      width: 100%;
+    }
   `,
 };
 
 const InputWrapper = styled.div`
-  width: 100%;
   display: flex;
   align-items: center;
   gap: var(--space-2);

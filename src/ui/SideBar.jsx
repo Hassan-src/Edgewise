@@ -55,7 +55,7 @@ function SideBar() {
         </ButtonIcon>
       </SideBarTop>
       <NavBar>{resize ? <MainNav /> : <SmallNav />}</NavBar>
-      <DarkModeToggle />
+      <DarkModeToggle $responsive="950px" />
     </StyledSideBar>
   );
 }

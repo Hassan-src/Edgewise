@@ -20,12 +20,18 @@ const Image = styled.img`
     css`
       height: 3rem;
       width: auto;
+      @media (max-width: 850px) {
+        height: 2.5rem;
+      }
     `}
   ${(props) =>
     props.$type === "LogIn" &&
     css`
-      height: 15rem;
+      height: 12rem;
       width: auto;
+      @media (max-width: 850px) {
+        height: 8rem;
+      }
     `}
 `;
 

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
+  width: 80%;
   max-height: 90dvh;
   position: fixed;
   top: 50%;
@@ -16,6 +17,10 @@ const StyledModal = styled.div`
   padding: var(--space-5) var(--space-6);
   transition: all 0.5s;
   overflow: auto;
+  @media (max-width: 950px) {
+    width: 100%;
+    max-height: 100dvh;
+  }
 `;
 
 const Overlay = styled.div`

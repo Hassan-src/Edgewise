@@ -141,7 +141,6 @@ const GlobalStyles = createGlobalStyle`
   font-size: var(--text-base);
   line-height: 1.5;
   transition: color 0.2s, background-color 0.2s;
-  overflow: hidden;
 }
 
   input,
@@ -214,7 +213,16 @@ const GlobalStyles = createGlobalStyle`
     /* For dark mode */
     filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
   }
-  
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+  &::-webkit-scrollbar-thumb {
+    background: var(--color-scroll-thumb);
+    border-radius: 4px;
+  }
 `;
 
 export default GlobalStyles;

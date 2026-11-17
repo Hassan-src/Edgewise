@@ -10,11 +10,20 @@ const $sizes = {
     font-size: var(--text-lg);
     font-weight: 500;
     padding: var(--space-2) var(--space-3);
+    @media (max-width: 950px) {
+      padding: var(--space-2) var(--space-2);
+    }
   `,
   large: css`
     font-size: var(--text-lg);
     font-weight: 600;
     padding: var(--space-3) var(--space-4);
+    @media (max-width: 950px) {
+      padding: var(--space-2) var(--space-3);
+    }
+    @media (max-width: 600px) {
+      padding: var(--space-2) var(--space-2);
+    }
   `,
 };
 

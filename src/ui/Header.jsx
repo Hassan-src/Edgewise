@@ -5,7 +5,6 @@ import Logo from "./Logo";
 import { useNavigate } from "react-router-dom";
 import Menus from "./Menus";
 import { HiArrowRightOnRectangle, HiOutlineUser } from "react-icons/hi2";
-import DarkModeToggle from "./DarkModeToggle";
 import { useLogout } from "../features/authentication/useLogout";
 
 const StyledHeader = styled.header`

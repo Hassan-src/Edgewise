@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const ButtonIcon = styled.button`
+  width: 100%;
   background: none;
   border: none;
   border-radius: var(--radius-md);

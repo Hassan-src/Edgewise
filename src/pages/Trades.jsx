@@ -15,7 +15,7 @@ function Trades() {
   if (account.length === 0) return <NoAccount />;
   return (
     <>
-      <Row $type="horizontal" $responsive="850px">
+      <Row $type="horizontal" $responsive="850px" $gap="medium">
         <Heading $as="h1">Trades</Heading>
         <Row $type="horizontal" $gap="medium" $responsive="410px">
           <AddTrade />
