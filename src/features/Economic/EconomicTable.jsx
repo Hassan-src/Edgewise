@@ -13,7 +13,17 @@ function EconomicTable() {
   );
   if (isPending) return <Loading />;
   return (
-    <Table columns="0.2fr 0.1fr 0.1fr 0.5fr 0.1fr 0.1fr">
+    <Table
+      columns="0.2fr 0.1fr 0.1fr 0.5fr 0.1fr 0.1fr"
+      mobileColumns="1fr"
+      mobileTemplate={`
+        "event event"
+        "currency impact"
+        "time time"
+      `}
+      mobileAreas={["event", "currency", "impact", "time"]}
+      hideHeaderOnMobile
+    >
       <Table.Header role="row">
         <div>Time</div>
         <div>Currency</div>
@@ -26,7 +36,6 @@ function EconomicTable() {
         data={todayEvents}
         render={(event) => <EconomicRow event={event} key={event.id} />}
       />
-      <Table.Footer></Table.Footer>
     </Table>
   );
 }

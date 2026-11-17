@@ -10,7 +10,17 @@ function RecentTradesTable() {
   if (isPending) return <Loading />;
   return (
     <Menus>
-      <Table columns="0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.1fr">
+      <Table
+        columns="0.2fr 0.2fr 0.2fr 0.2fr 0.2fr 0.1fr"
+        mobileColumns="minmax(0, 1fr) minmax(0, 1fr) auto"
+        mobileTemplate={`
+          "date symbol action"
+          "direction pnl action"
+          "source source action"
+        `}
+        mobileAreas={["date", "symbol", "direction", "pnl", "source", "action"]}
+        hideHeaderOnMobile
+      >
         <Table.Header role="row">
           <div>Date</div>
           <div>Symbol</div>

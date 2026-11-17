@@ -1,7 +1,8 @@
 import { createContext, useContext } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 const StyledTable = styled.div`
+  min-width: 0;
   background-color: var(--color-surface);
   border: 3px solid var(--color-border);
   box-shadow: var(--shadow-md);
@@ -10,12 +11,17 @@ const StyledTable = styled.div`
 `;
 
 const CommonRow = styled.div`
+  min-width: 0;
   display: grid;
   grid-template-columns: ${(props) => props.$columns};
   align-items: center;
   column-gap: var(--space-4);
   padding: var(--space-3) var(--space-5);
   transition: none;
+  @media (max-width: 850px) {
+    padding: var(--space-3);
+    grid-template-columns: ${(props) => props.$mobileColumns};
+  }
 `;
 
 const StyledHeader = styled(CommonRow)`
@@ -23,12 +29,33 @@ const StyledHeader = styled(CommonRow)`
   background-color: var(--color-surface-muted);
   padding: var(--space-3) var(--space-5);
   font-weight: 700;
+  @media (max-width: 850px) {
+    ${(props) =>
+      props.$hideHeaderOnMobile &&
+      css`
+        display: none;
+      `}
+  }
 `;
 
 const StyledRow = styled(CommonRow)`
   padding: var(--space-3) var(--space-5);
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-border);
+  }
+  @media (max-width: 850px) {
+    grid-template-areas: ${(props) => props.$mobileTemplate};
+
+    ${(props) =>
+      props.$mobileAreas?.map(
+        (area, index) => css`
+          gap: var(--space-2);
+          & > :nth-child(${index + 1}) {
+            grid-area: ${area};
+            min-width: 0;
+          }
+        `,
+      )}
   }
 `;
 
@@ -51,26 +78,55 @@ const Empty = styled.p`
 
 const TableContext = createContext();
 
-function Table({ columns, children }) {
+function Table({
+  columns,
+  mobileColumns = "1fr",
+  mobileTemplate,
+  mobileAreas,
+  hideHeaderOnMobile = false,
+  children,
+}) {
   return (
-    <TableContext.Provider value={{ columns }}>
+    <TableContext.Provider
+      value={{
+        columns,
+        mobileColumns,
+        mobileTemplate,
+        mobileAreas,
+        hideHeaderOnMobile,
+      }}
+    >
       <StyledTable role="table">{children}</StyledTable>
     </TableContext.Provider>
   );
 }
 
 function Header({ children }) {
-  const { columns } = useContext(TableContext);
+  const { columns, mobileColumns, hideHeaderOnMobile } =
+    useContext(TableContext);
   return (
-    <StyledHeader role="row" $columns={columns} as="header">
+    <StyledHeader
+      role="row"
+      $columns={columns}
+      $mobileColumns={mobileColumns}
+      $hideHeaderOnMobile={hideHeaderOnMobile}
+      as="header"
+    >
       {children}
     </StyledHeader>
   );
 }
 function Row({ children }) {
-  const { columns } = useContext(TableContext);
+  const { columns, mobileColumns, mobileTemplate, mobileAreas } =
+    useContext(TableContext);
   return (
-    <StyledRow role="row" $columns={columns}>
+    <StyledRow
+      role="row"
+      $columns={columns}
+      $mobileColumns={mobileColumns}
+      $mobileTemplate={mobileTemplate}
+      $mobileAreas={mobileAreas}
+    >
       {children}
     </StyledRow>
   );
