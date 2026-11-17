@@ -35,11 +35,8 @@ const Main = styled.main`
     border-radius: 4px;
   }
   @media (max-width: 950px) {
-    padding: var(--space-8) 0 var(--space-8);
+    padding: var(--space-16) 0 8rem;
     grid-area: main;
-  }
-  @media (max-width: 800px) {
-    padding: var(--space-8) 0 0;
   }
 `;
 

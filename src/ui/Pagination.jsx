@@ -9,6 +9,10 @@ const StyledPagination = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 570px) {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
 `;
 
 const P = styled.p`

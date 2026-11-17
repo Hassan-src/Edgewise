@@ -29,7 +29,7 @@ const GlobalStyles = createGlobalStyle`
   --space-10: 2.5rem;
   --space-12: 3rem;
   --space-16: 4rem;
-
+  
   /* Radius */
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;

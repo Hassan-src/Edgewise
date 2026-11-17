@@ -67,6 +67,9 @@ const StyledFooter = styled.footer`
   display: flex;
   padding: var(--space-3);
   background-color: var(--color-surface-muted);
+  @media (max-width: 570px) {
+    padding: var(--space-2);
+  }
 `;
 
 const Empty = styled.p`
