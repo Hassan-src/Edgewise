@@ -22,6 +22,7 @@ const Box = styled.div`
 `;
 
 const ImageBox = styled.div`
+  width: fit-content;
   position: relative;
 `;
 
@@ -67,7 +68,12 @@ function UpdateUserDataForm() {
         <SecondaryText>Modify your current information</SecondaryText>
       </Row>
       <Form onSubmit={handelSubmit}>
-        <Row $type="horizontalSticky" $gap="xlarge" $marginBottom="large">
+        <Row
+          $type="horizontalSticky"
+          $gap="xlarge"
+          $marginBottom="large"
+          $responsive="950px"
+        >
           <ImageBox>
             <Avatar
               $type="profile"
