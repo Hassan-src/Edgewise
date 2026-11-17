@@ -5,6 +5,7 @@ import MainNav from "./MainNav";
 import ButtonIcon from "./ButtonIcon";
 import { useAppMode } from "../context/useAppMode";
 import SmallNav from "./SmallNav";
+import DarkModeToggle from "./DarkModeToggle";
 
 const StyledSideBar = styled.div`
   background-color: var(--color-surface);
@@ -54,6 +55,7 @@ function SideBar() {
         </ButtonIcon>
       </SideBarTop>
       <NavBar>{resize ? <MainNav /> : <SmallNav />}</NavBar>
+      <DarkModeToggle />
     </StyledSideBar>
   );
 }

@@ -1,8 +1,12 @@
 import styled from "styled-components";
 
-import HeaderMenu from "./HeaderMenu";
 import UserAvatar from "../features/authentication/UserAvatar";
 import Logo from "./Logo";
+import { useNavigate } from "react-router-dom";
+import Menus from "./Menus";
+import { HiArrowRightOnRectangle, HiOutlineUser } from "react-icons/hi2";
+import DarkModeToggle from "./DarkModeToggle";
+import { useLogout } from "../features/authentication/useLogout";
 
 const StyledHeader = styled.header`
   background-color: var(--color-surface);
@@ -17,12 +21,42 @@ const StyledHeader = styled.header`
   }
 `;
 
+const Options = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-5);
+`;
+
 function Header() {
+  const navigate = useNavigate();
+  const { logout, isPending } = useLogout();
   return (
     <StyledHeader>
       <Logo $type="Header" />
-      <UserAvatar />
-      <HeaderMenu />
+      <Options>
+        <Menus>
+          <Menus.Menu>
+            <UserAvatar />
+            <Menus.Toggle id="headerMenu" />
+            <Menus.List id="headerMenu">
+              <Menus.Button
+                onClick={() => navigate("/account")}
+                icon={<HiOutlineUser />}
+              >
+                Profile
+              </Menus.Button>
+              <Menus.Button
+                icon={<HiArrowRightOnRectangle />}
+                disabled={isPending}
+                onClick={logout}
+              >
+                SignOut
+              </Menus.Button>
+            </Menus.List>
+          </Menus.Menu>
+        </Menus>
+      </Options>
     </StyledHeader>
   );
 }

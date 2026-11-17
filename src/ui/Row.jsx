@@ -57,10 +57,11 @@ const Row = styled.div`
   ${(props) =>
     props.$responsive &&
     css`
-      @media (max-width: ${props.$responsive}) {
+      @media (max-width: ${typeof props.$responsive === "string"
+          ? props.$responsive
+          : "768px"}) {
         flex-direction: column;
-        align-items: center;
-        gap: var(--space-3);
+        align-items: ${props.$responsiveAlign || "stretch"};
       }
     `}
 `;
