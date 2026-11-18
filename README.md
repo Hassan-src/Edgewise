@@ -1,4 +1,7 @@
- <div align="center">
+<div align="center">
+  <img src="screenshots/edgewise-header.png" alt="Edgewise Trading Journal Dashboard" width="100%" />
+</div> 
+<div align="center">
 
 # 📊 Edgewise
 
