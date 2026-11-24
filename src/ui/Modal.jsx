@@ -5,8 +5,9 @@ import styled from "styled-components";
 import { useClickOutside } from "../hooks/useClickOutside";
 
 const StyledModal = styled.div`
-  width: 80%;
-  max-height: 90dvh;
+  width: 100%;
+  max-width: fit-content;
+  max-height: calc(100dvh - 2rem);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -29,8 +30,7 @@ const Overlay = styled.div`
   background-color: var(--color-backdrop);
   backdrop-filter: blur(4px);
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0;
   z-index: 999;
   transition: all 0.5s;
 `;
