@@ -20,6 +20,7 @@ const StyledModal = styled.div`
   overflow: auto;
   @media (max-width: 950px) {
     width: 100%;
+    max-width: 100dvw;
     max-height: 100dvh;
   }
 `;

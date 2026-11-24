@@ -27,7 +27,7 @@ const StyledCard = styled.div`
     padding: var(--space-3);
   }
   @media (max-width: 650px) {
-    padding: var(--space-2);
+    padding: var(--space-3);
   }
 `;
 
