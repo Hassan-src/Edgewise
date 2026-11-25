@@ -1,4 +1,4 @@
-import { PAGE_SIZE } from "../utils/constants";
+import { PAGE_SIZE } from "../../../edgewise-js/src/utils/constants";
 import supabase from "./supabase";
 
 export async function getTrades({
