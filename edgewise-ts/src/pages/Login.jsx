@@ -1,0 +1,28 @@
+import styled from "styled-components";
+
+import LoginForm from "../features/authentication/LoginForm";
+
+const LogIn = styled.main`
+  min-height: 100dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 48rem);
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-bg);
+  padding: var(--space-6) var(--space-4);
+  @media (max-width: 900px) {
+    width: 100dvw;
+    min-height: 100dvh;
+    padding: 0;
+  }
+`;
+
+function Login() {
+  return (
+    <LogIn>
+      <LoginForm />
+    </LogIn>
+  );
+}
+
+export default Login;

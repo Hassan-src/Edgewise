@@ -22,5 +22,11 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["src"]
+  "include": [
+    "src",
+    "../edgewise-js/src/utils",
+    "../edgewise-js/src/data",
+    "../edgewise-js/src/features",
+    "../edgewise-js/src/styles"
+  ]
 }
