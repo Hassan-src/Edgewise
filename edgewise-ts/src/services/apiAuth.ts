@@ -1,6 +1,12 @@
 import supabase from "./supabase";
 
-export async function signup({ userName, email, password }) {
+type SignUpProps = {
+  userName: string;
+  email: string;
+  password: string;
+};
+
+export async function signup({ userName, email, password }: SignUpProps) {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
@@ -16,7 +22,12 @@ export async function signup({ userName, email, password }) {
   return data;
 }
 
-export async function login({ email, password }) {
+type LoginProps = {
+  email: string;
+  password: string;
+};
+
+export async function login({ email, password }: LoginProps) {
   const { data, error } = await supabase.auth.signInWithPassword({
     email,
     password,
@@ -39,8 +50,25 @@ export async function getCurrentUser() {
   return data?.user;
 }
 
-export async function updateCurrentUser({ password, userName, avatar }) {
-  let updateData = {};
+type UpdateCurrentUserProps = {
+  password: string;
+  userName: string;
+  avatar: File | null;
+};
+
+type UpdateDataProps = {
+  data?: {
+    userName: string;
+  };
+  password?: string;
+};
+
+export async function updateCurrentUser({
+  password,
+  userName,
+  avatar,
+}: UpdateCurrentUserProps) {
+  const updateData: UpdateDataProps = {};
 
   if (password) updateData.password = password;
 
@@ -55,6 +83,8 @@ export async function updateCurrentUser({ password, userName, avatar }) {
   } = await supabase.auth.getUser();
 
   if (userError) throw new Error(userError.message);
+
+  if (!user) throw new Error("No authenticated user found.");
 
   const oldAvatarPath = user.user_metadata.avatarPath;
 

@@ -1,6 +1,6 @@
 import fileHeaderChecker from "./fileHeaderChecker";
 
-function extractPositionRows(data) {
+function extractPositionRows(data: unknown[][]) {
   // Step 1: Find the exact header row.
   const headerIndex = data.findIndex(fileHeaderChecker);
   // If the header doesn't exist, don't import anything.
@@ -24,6 +24,7 @@ function extractPositionRows(data) {
       /^\d{4}\.\d{2}\.\d{2} \d{2}:\d{2}:\d{2}$/.test(row[0]) &&
       typeof row[1] === "number" &&
       typeof row[2] === "string" &&
+      typeof row[3] === "string" &&
       ["buy", "sell"].includes(row[3])
     ) {
       positionRows.push(row);

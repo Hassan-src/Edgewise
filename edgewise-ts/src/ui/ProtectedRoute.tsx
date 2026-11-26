@@ -3,6 +3,7 @@ import { Navigate } from "react-router-dom";
 
 import { useUser } from "../features/authentication/useUser";
 import Loading from "./Loading";
+import type { ReactNode } from "react";
 
 const FullPage = styled.div`
   height: 100dvh;
@@ -12,7 +13,11 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
-function ProtectedRoute({ children }) {
+type ProtectedRoute = {
+  children: ReactNode;
+};
+
+function ProtectedRoute({ children }: ProtectedRoute) {
   const { isAuthenticated, isPending } = useUser();
 
   if (isPending) {

@@ -15,6 +15,8 @@ const $status = {
   `,
 };
 
+type StatusType = keyof typeof $status;
+
 const $sizes = {
   normal: css`
     font-size: var(--text-base);
@@ -35,7 +37,14 @@ const $sizes = {
   `,
 };
 
-const MetricValue = styled.span`
+type SizeType = keyof typeof $sizes;
+
+type MetricValueProps = {
+  $status: StatusType;
+  $size: SizeType;
+};
+
+const MetricValue = styled.span<MetricValueProps>`
   font-family: var(--font-mono);
   font-variant-numeric: tabular-nums;
   display: flex;

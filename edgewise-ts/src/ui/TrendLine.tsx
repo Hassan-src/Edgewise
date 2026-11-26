@@ -10,7 +10,11 @@ const StyledTrendLine = styled.div`
   width: 100%;
 `;
 
-const Image = styled.img`
+type ImageProps = {
+  $type: "Profit" | "Loss";
+};
+
+const Image = styled.img<ImageProps>`
   ${(props) =>
     props.$type === "Profit" &&
     css`
@@ -31,7 +35,7 @@ const Image = styled.img`
     `}
 `;
 
-function TrendLine({ $type }) {
+function TrendLine({ $type }: ImageProps) {
   const { isDarkMode } = useAppMode();
   const srcProfit = $type === "Profit" && isDarkMode ? profitDark : profitLight;
   const srcLoss = $type === "Loss" && isDarkMode ? lossDark : lossLight;

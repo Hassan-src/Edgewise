@@ -1,4 +1,11 @@
-import { cloneElement, createContext, useContext, useState } from "react";
+import {
+  cloneElement,
+  createContext,
+  useContext,
+  useState,
+  type PropsWithChildren,
+  type ReactElement,
+} from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
 import styled from "styled-components";
@@ -56,9 +63,25 @@ const Button = styled.button`
   }
 `;
 
-const ModalContext = createContext();
+type ModalContextProps = {
+  open: (name: string) => void;
+  openName: string;
+  close: () => void;
+};
 
-function Modal({ children }) {
+const ModalContext = createContext<ModalContextProps | null>(null);
+
+function useModalContext() {
+  const context = useContext(ModalContext);
+  if (!context) {
+    throw new Error("Modal components must be used inside Modal.");
+  }
+  return context;
+}
+
+type RootModalProps = PropsWithChildren;
+
+function RootModal({ children }: RootModalProps) {
   const [openName, setOpenName] = useState("");
   const close = () => setOpenName("");
   const open = setOpenName;
@@ -69,15 +92,29 @@ function Modal({ children }) {
   );
 }
 
-function Open({ children, opens: opensWindowName }) {
-  const { open } = useContext(ModalContext);
+type OpenProps = {
+  children: ReactElement<{
+    onClick: () => void;
+  }>;
+  opens: string;
+};
+
+function Open({ children, opens: opensWindowName }: OpenProps) {
+  const { open } = useModalContext();
   return cloneElement(children, { onClick: () => open(opensWindowName) });
 }
 
-function Window({ children, name }) {
-  const { openName, close } = useContext(ModalContext);
+type WindowProps = {
+  children: ReactElement<{
+    onCloseModal?: () => void;
+  }>;
+  name: string;
+};
+
+function Window({ children, name }: WindowProps) {
+  const { openName, close } = useModalContext();
   // To close the modal when clicking outside of the modal window
-  const ref = useClickOutside(close);
+  const ref = useClickOutside<HTMLDivElement>({ handler: close });
 
   if (name !== openName) return null;
   // To avoid the modal to get cut by the overflow property we use createPortal
@@ -94,7 +131,9 @@ function Window({ children, name }) {
   );
 }
 
-Modal.Open = Open;
-Modal.Window = Window;
+const Modal = Object.assign(RootModal, {
+  Open,
+  Window,
+});
 
 export default Modal;

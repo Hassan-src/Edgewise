@@ -1,9 +1,10 @@
-import { createContext, useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useState, type PropsWithChildren } from "react";
 import { useLocalStorageState } from "../hooks/useLocalStorageState";
+import { AppContext } from "./AppContext";
 
-const AppContext = createContext(undefined);
+type AppProviderProps = PropsWithChildren;
 
-function AppProvider({ children }) {
+function AppProvider({ children }: AppProviderProps) {
   const [isDarkMode, setIsDarkMode] = useLocalStorageState(
     window.matchMedia("(prefers-color-scheme: dark)").matches,
     "isDarkMode",
@@ -32,4 +33,4 @@ function AppProvider({ children }) {
   );
 }
 
-export { AppProvider, AppContext };
+export { AppProvider };

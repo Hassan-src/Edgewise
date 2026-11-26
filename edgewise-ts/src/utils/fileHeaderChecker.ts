@@ -1,4 +1,4 @@
-function fileHeaderChecker(row) {
+function fileHeaderChecker(row: unknown[]) {
   const expected = [
     "Time",
     "Position",

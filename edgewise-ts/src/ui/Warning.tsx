@@ -1,7 +1,8 @@
+import type { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
 const $type = {
-  oredered: css`
+  ordered: css`
     display: flex;
   `,
   unordered: css`
@@ -9,7 +10,13 @@ const $type = {
   `,
 };
 
-const StyledWarning = styled.div`
+type OrderType = keyof typeof $type;
+
+type StyledWarningProp = {
+  $type: OrderType;
+};
+
+const StyledWarning = styled.div<StyledWarningProp>`
   width: fit-content;
   padding: var(--space-3) var(--space-4);
   border: 2px solid var(--color-warning);
@@ -26,7 +33,11 @@ const Ul = styled.ul`
   padding: 0 var(--space-3);
 `;
 
-function Warning({ children, $type = "unordered" }) {
+type orderProps = PropsWithChildren<{
+  $type?: OrderType;
+}>;
+
+function Warning({ children, $type = "unordered" }: orderProps) {
   return (
     <StyledWarning $type={$type}>
       {$type === "ordered" ? <Ol>{children}</Ol> : <Ul>{children}</Ul>}

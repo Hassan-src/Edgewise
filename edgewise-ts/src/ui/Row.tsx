@@ -18,6 +18,8 @@ const $gap = {
   `,
 };
 
+type GapType = keyof typeof $gap;
+
 const $marginBottom = {
   small: css`
     margin-bottom: var(--space-2);
@@ -33,7 +35,17 @@ const $marginBottom = {
   `,
 };
 
-const Row = styled.div`
+type MarginBottomType = keyof typeof $marginBottom;
+
+type RowProps = {
+  $type?: "horizontal" | "horizontalSticky" | "vertical";
+  $gap?: GapType;
+  $marginBottom?: MarginBottomType;
+  $responsive?: boolean | string;
+  $responsiveAlign?: string;
+};
+
+const Row = styled.div<RowProps>`
   display: flex;
 
   ${(props) =>
@@ -52,8 +64,8 @@ const Row = styled.div`
     css`
       flex-direction: column;
     `}
-  ${(props) => $gap[props.$gap]}
-  ${(props) => $marginBottom[props.$marginBottom]}
+  ${(props) => props.$gap && $gap[props.$gap]}
+  ${(props) => props.$marginBottom && $marginBottom[props.$marginBottom]}
   ${(props) =>
     props.$responsive &&
     css`

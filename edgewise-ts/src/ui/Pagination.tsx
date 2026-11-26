@@ -28,7 +28,11 @@ const ButtonsBox = styled.div`
   gap: var(--space-3);
 `;
 
-const PaginationButton = styled.button`
+type PaginationButtonProps = {
+  $active: boolean;
+};
+
+const PaginationButton = styled.button<PaginationButtonProps>`
   background-color: transparent;
   color: ${(props) =>
     props.$active ? "var(--color-text-secondary)" : "var(--color-text)"};
@@ -57,7 +61,11 @@ const PaginationButton = styled.button`
   }
 `;
 
-function Pagination({ count }) {
+type Pagination = {
+  count: number;
+};
+
+function Pagination({ count }: Pagination) {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = !searchParams.get("page")
     ? 1
@@ -65,12 +73,12 @@ function Pagination({ count }) {
   const pageCount = Math.ceil(count / PAGE_SIZE);
   function nextPage() {
     const next = currentPage === pageCount ? currentPage : currentPage + 1;
-    searchParams.set("page", next);
+    searchParams.set("page", next.toString());
     setSearchParams(searchParams);
   }
   function previousPage() {
     const previous = currentPage === 1 ? currentPage : currentPage - 1;
-    searchParams.set("page", previous);
+    searchParams.set("page", previous.toString());
     setSearchParams(searchParams);
   }
 

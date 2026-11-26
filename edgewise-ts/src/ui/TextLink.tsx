@@ -1,3 +1,4 @@
+import type { PropsWithChildren, ReactNode } from "react";
 import { Link } from "react-router-dom";
 import styled, { css } from "styled-components";
 
@@ -8,6 +9,8 @@ const $type = {
   `,
 };
 
+type LinkType = keyof typeof $type;
+
 const StyledTextLink = styled.div`
   display: flex;
   align-items: center;
@@ -17,7 +20,11 @@ const StyledTextLink = styled.div`
   color: var(--color-text-secondary);
 `;
 
-const StyledLink = styled(Link)`
+type StyledLinkProp = {
+  $type: LinkType;
+};
+
+const StyledLink = styled(Link)<StyledLinkProp>`
   color: var(--color-accent);
   transition: all 0.2s;
   ${(props) => $type[props.$type]}
@@ -27,7 +34,20 @@ const StyledLink = styled(Link)`
   }
 `;
 
-function TextLink({ $linkText, children, to, icon, $type }) {
+type TextLinkProps = PropsWithChildren<{
+  $type?: LinkType;
+  $linkText: string;
+  to: string;
+  icon?: ReactNode;
+}>;
+
+function TextLink({
+  $linkText,
+  children,
+  to,
+  icon,
+  $type = "link",
+}: TextLinkProps) {
   return (
     <StyledTextLink>
       <p>

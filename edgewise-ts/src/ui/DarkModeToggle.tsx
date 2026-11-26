@@ -5,7 +5,11 @@ import ButtonIcon from "./ButtonIcon";
 import { useAppMode } from "../context/useAppMode";
 import styled, { css } from "styled-components";
 
-const StyledDarkModeToggle = styled.div`
+type DarkModeToggleProps = {
+  $responsive: boolean;
+};
+
+const StyledDarkModeToggle = styled.div<DarkModeToggleProps>`
   display: flex;
   align-items: center;
   justify-content: center;

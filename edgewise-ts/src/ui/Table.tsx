@@ -1,4 +1,9 @@
-import { createContext, useContext } from "react";
+import {
+  createContext,
+  useContext,
+  type PropsWithChildren,
+  type ReactNode,
+} from "react";
 import styled, { css } from "styled-components";
 
 const StyledTable = styled.div`
@@ -10,7 +15,12 @@ const StyledTable = styled.div`
   overflow: hidden;
 `;
 
-const CommonRow = styled.div`
+type CommonRowProps = {
+  $columns?: string;
+  $mobileColumns?: string;
+};
+
+const CommonRow = styled.div<CommonRowProps>`
   min-width: 0;
   display: grid;
   grid-template-columns: ${(props) => props.$columns};
@@ -24,7 +34,11 @@ const CommonRow = styled.div`
   }
 `;
 
-const StyledHeader = styled(CommonRow)`
+type StyledHeaderProps = {
+  $hideHeaderOnMobile?: boolean;
+};
+
+const StyledHeader = styled(CommonRow)<StyledHeaderProps>`
   border-bottom: 1px solid var(--color-border);
   background-color: var(--color-surface-muted);
   padding: var(--space-3) var(--space-5);
@@ -38,7 +52,12 @@ const StyledHeader = styled(CommonRow)`
   }
 `;
 
-const StyledRow = styled(CommonRow)`
+type StyledRowProps = {
+  $mobileTemplate?: string;
+  $mobileAreas?: string[];
+};
+
+const StyledRow = styled(CommonRow)<StyledRowProps>`
   padding: var(--space-3) var(--space-5);
   &:not(:last-child) {
     border-bottom: 1px solid var(--color-border);
@@ -79,16 +98,36 @@ const Empty = styled.p`
   margin: var(--space-6);
 `;
 
-const TableContext = createContext();
+type TableContextValue = {
+  columns: string;
+  mobileColumns: string;
+  mobileTemplate?: string;
+  mobileAreas?: string[];
+  hideHeaderOnMobile?: boolean;
+};
 
-function Table({
+const TableContext = createContext<TableContextValue | null>(null);
+
+function useTableContext() {
+  const context = useContext(TableContext);
+
+  if (!context) {
+    throw new Error("Table components must be used inside Table.");
+  }
+
+  return context;
+}
+
+type TableRootProps = PropsWithChildren<TableContextValue>;
+
+function TableRoot({
   columns,
   mobileColumns = "1fr",
   mobileTemplate,
   mobileAreas,
   hideHeaderOnMobile = false,
   children,
-}) {
+}: TableRootProps) {
   return (
     <TableContext.Provider
       value={{
@@ -104,9 +143,12 @@ function Table({
   );
 }
 
-function Header({ children }) {
-  const { columns, mobileColumns, hideHeaderOnMobile } =
-    useContext(TableContext);
+type HeaderProps = {
+  children: ReactNode;
+};
+
+function Header({ children }: HeaderProps) {
+  const { columns, mobileColumns, hideHeaderOnMobile } = useTableContext();
   return (
     <StyledHeader
       role="row"
@@ -119,9 +161,14 @@ function Header({ children }) {
     </StyledHeader>
   );
 }
-function Row({ children }) {
+
+type RowProps = {
+  children: ReactNode;
+};
+
+function Row({ children }: RowProps) {
   const { columns, mobileColumns, mobileTemplate, mobileAreas } =
-    useContext(TableContext);
+    useTableContext();
   return (
     <StyledRow
       role="row"
@@ -135,18 +182,29 @@ function Row({ children }) {
   );
 }
 
-function Body({ data, render }) {
+type BodyProps<T> = {
+  data: T[];
+  render: (item: T, index: number) => ReactNode;
+};
+
+function Body<T>({ data, render }: BodyProps<T>) {
   if (!data?.length) return <Empty>No data to show at the moment</Empty>;
   return <StyledBody>{data.map(render)}</StyledBody>;
 }
 
-function Footer({ children }) {
+type FooterProps = {
+  children: ReactNode;
+};
+
+function Footer({ children }: FooterProps) {
   return <StyledFooter>{children}</StyledFooter>;
 }
 
-Table.Header = Header;
-Table.Row = Row;
-Table.Body = Body;
-Table.Footer = Footer;
+const Table = Object.assign(TableRoot, {
+  Header,
+  Row,
+  Body,
+  Footer,
+});
 
 export default Table;

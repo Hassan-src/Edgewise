@@ -1,7 +1,7 @@
 import styled, { css } from "styled-components";
 
 const $type = {
-  oredered: css`
+  ordered: css`
     display: flex;
   `,
   unordered: css`
