@@ -19,10 +19,22 @@ const BtnDiv = styled.div`
   gap: var(--space-4);
 `;
 
-function ConfirmDelete({ resourceName, onConfirm, disabled, onCloseModal }) {
+type ConfirmDeleteProps = {
+  resourceName: string;
+  disabled: boolean;
+  onConfirm: () => void;
+  onCloseModal: () => void;
+};
+
+function ConfirmDelete({
+  resourceName,
+  onConfirm,
+  disabled,
+  onCloseModal,
+}: ConfirmDeleteProps) {
   return (
     <StyledConfirmDelete>
-      <Heading as="h3">Delete {resourceName}</Heading>
+      <Heading $as="h3">Delete {resourceName}</Heading>
       <p>Are you sure you want to delete {resourceName} permanently?</p>
       <BtnDiv>
         <Button

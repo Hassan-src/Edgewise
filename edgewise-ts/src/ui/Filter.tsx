@@ -11,7 +11,11 @@ const StyledFilter = styled.div`
   gap: var(--space-1);
 `;
 
-const FilterButton = styled.button`
+type FilterButtonPorps = {
+  $active: boolean;
+};
+
+const FilterButton = styled.button<FilterButtonPorps>`
   background-color: var(--color-bg);
   border: none;
 
@@ -35,12 +39,22 @@ const FilterButton = styled.button`
   }
 `;
 
-function Filter({ filteredField, options }) {
+type OptionType = {
+  value: string;
+  label: string;
+};
+
+type FilterProps = {
+  filteredField: string;
+  options: OptionType[];
+};
+
+function Filter({ filteredField, options }: FilterProps) {
   const [searchParams, setSearchParams] = useSearchParams();
-  const currentFilter = searchParams.get(filteredField) || options.at(0).value;
-  function handleClick(value) {
+  const currentFilter = searchParams.get(filteredField) || options.at(0)?.value;
+  function handleClick(value: string) {
     searchParams.set(filteredField, value);
-    if (searchParams.get("page")) searchParams.set("page", 1);
+    if (searchParams.get("page")) searchParams.set("page", "1");
     setSearchParams(searchParams);
   }
   return (

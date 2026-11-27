@@ -1,5 +1,5 @@
 import styled, { css } from "styled-components";
-import { useState } from "react";
+import { useState, type ComponentPropsWithoutRef } from "react";
 import { HiOutlineEye, HiOutlineEyeSlash } from "react-icons/hi2";
 
 const $size = {
@@ -14,6 +14,8 @@ const $size = {
   `,
 };
 
+type SizeType = keyof typeof $size;
+
 const InputWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -21,7 +23,11 @@ const InputWrapper = styled.div`
   position: relative;
 `;
 
-const StyledInput = styled.input`
+type StyledInputProps = {
+  $size: SizeType;
+};
+
+const StyledInput = styled.input<StyledInputProps>`
   width: 100%;
   min-width: 0;
   background-color: var(--color-surface-muted);
@@ -49,7 +55,19 @@ const ButtonView = styled.button`
   }
 `;
 
-function InputPassword({ type = "password", $size, ...props }) {
+type InputPasswordProps = Omit<
+  ComponentPropsWithoutRef<"input">,
+  "size" | "type"
+> & {
+  type?: string;
+  $size: SizeType;
+};
+
+function InputPassword({
+  type = "password",
+  $size,
+  ...props
+}: InputPasswordProps) {
   const [showPassword, setShowPassword] = useState(false);
   return (
     <InputWrapper>

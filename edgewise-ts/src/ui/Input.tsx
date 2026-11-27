@@ -12,7 +12,13 @@ const $size = {
   `,
 };
 
-const Input = styled.input`
+type SizeType = keyof typeof $size;
+
+type InputProps = {
+  $size: SizeType;
+};
+
+const Input = styled.input<InputProps>`
   width: 100%;
   min-width: 0;
   background-color: var(--color-surface-muted);

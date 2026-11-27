@@ -1,6 +1,11 @@
+import type { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-const StyledFormRow = styled.div`
+type StyledFormRowProps = {
+  $type?: "action";
+};
+
+const StyledFormRow = styled.div<StyledFormRowProps>`
   display: grid;
   align-items: center;
   grid-template-columns: minmax(0, 0.5fr) minmax(0, 1fr) minmax(0, 0.5fr);
@@ -39,7 +44,14 @@ const Error = styled.span`
   color: var(--color-error-dark);
 `;
 
-function FormRow({ label, error, children, id, $type }) {
+type FormRowProps = PropsWithChildren<{
+  label?: string;
+  error?: string;
+  id?: string;
+  $type?: "action";
+}>;
+
+function FormRow({ label, error, children, id, $type }: FormRowProps) {
   return (
     <StyledFormRow $type={$type}>
       {label && <Label htmlFor={id}>{label}:</Label>}

@@ -1,3 +1,4 @@
+import type { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
 const $gap = {
@@ -12,7 +13,14 @@ const $gap = {
   `,
 };
 
-const StyledCard = styled.div`
+type GapType = keyof typeof $gap;
+
+type StyledCardProps = {
+  $columns?: string;
+  $gap?: GapType;
+};
+
+const StyledCard = styled.div<StyledCardProps>`
   height: 100%;
   display: grid;
   grid-template-columns: ${(props) => props.$columns || "1fr"};
@@ -22,7 +30,7 @@ const StyledCard = styled.div`
   background-color: var(--color-surface);
   position: relative;
   overflow: hidden;
-  ${(props) => $gap[props.$gap]}
+  ${(props) => props.$gap && $gap[props.$gap]}
   @media (max-width: 950px) {
     padding: var(--space-3);
   }
@@ -31,7 +39,12 @@ const StyledCard = styled.div`
   }
 `;
 
-function Card({ $columns, children, $gap }) {
+type CardProps = PropsWithChildren<{
+  $columns?: string;
+  $gap?: GapType;
+}>;
+
+function Card({ $columns, children, $gap }: CardProps) {
   return (
     <StyledCard $columns={$columns} $gap={$gap}>
       {children}

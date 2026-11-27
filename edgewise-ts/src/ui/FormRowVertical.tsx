@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import styled from "styled-components";
 
 const StyledFormRow = styled.div`
@@ -21,7 +22,13 @@ const Error = styled.span`
   color: var(--color-error-dark);
 `;
 
-function FormRowVertical({ label, error, children }) {
+type FormRowVerticalProps = {
+  label?: string;
+  error?: string;
+  children: ReactElement<{ id?: string }>;
+};
+
+function FormRowVertical({ label, error, children }: FormRowVerticalProps) {
   return (
     <StyledFormRow>
       {label && <Label htmlFor={children.props.id}>{label}:</Label>}

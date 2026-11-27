@@ -1,6 +1,11 @@
 import styled, { css } from "styled-components";
 
-const Form = styled.form`
+type FormProps = {
+  $type?: "regular" | "modal";
+};
+
+
+const Form = styled.form<FormProps>`
   overflow: hidden;
   font-size: var(--text-xl);
   padding: 0 var(--space-4);

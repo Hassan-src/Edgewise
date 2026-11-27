@@ -1,6 +1,13 @@
+import type { PropsWithChildren } from "react";
 import styled, { css } from "styled-components";
 
-const Value = styled.span`
+type ValueType = "Profit" | "Loss";
+
+type ValueProps = {
+  $type?: ValueType;
+};
+
+const Value = styled.span<ValueProps>`
   width: fit-content;
   font-size: var(--text-lg);
   font-weight: 600;
@@ -20,7 +27,11 @@ const Value = styled.span`
     `}
 `;
 
-function CardFooter({ $type, children }) {
+type CardFooterProps = PropsWithChildren<{
+  $type?: ValueType;
+}>;
+
+function CardFooter({ $type, children }: CardFooterProps) {
   return <Value $type={$type}>{children}</Value>;
 }
 

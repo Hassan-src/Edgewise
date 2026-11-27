@@ -5,7 +5,11 @@ import Header from "./Header";
 import SideBar from "./SideBar";
 import { useAppMode } from "../context/useAppMode";
 
-const StyledAppLayout = styled.div`
+type StyledAppLayoutProps = {
+  $sideType?: "expand" | "shrink";
+};
+
+const StyledAppLayout = styled.div<StyledAppLayoutProps>`
   display: grid;
   grid-template-columns: ${(props) =>
     props.$sideType === "expand" ? "16rem 1fr" : "5rem 1fr"};

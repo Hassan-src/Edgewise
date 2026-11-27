@@ -27,6 +27,8 @@ const $sizes = {
   `,
 };
 
+type SizeType = keyof typeof $sizes;
+
 const $variations = {
   primary: css`
     background-color: var(--color-accent);
@@ -52,7 +54,14 @@ const $variations = {
   `,
 };
 
-const Button = styled.button`
+type VariationType = keyof typeof $variations;
+
+type ButtonProps = {
+  $size: SizeType;
+  $variation: VariationType;
+};
+
+const Button = styled.button<ButtonProps>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -62,8 +71,8 @@ const Button = styled.button`
   border: none;
   border-radius: var(--radius-md);
   text-transform: capitalize;
-  ${(props) => $sizes[props.$size]}
-  ${(props) => $variations[props.$variation]}
+  ${(props) => props.$size && $sizes[props.$size]}
+  ${(props) => props.$variation && $variations[props.$variation]}
 `;
 
 export default Button;

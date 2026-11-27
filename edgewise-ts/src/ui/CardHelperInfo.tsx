@@ -1,5 +1,7 @@
 import { HiOutlineInformationCircle } from "react-icons/hi2";
 import styled from "styled-components";
+import CardInfo from "./CardInfo";
+import type { ReactNode } from "react";
 
 const StyledHelperInfo = styled.div`
   display: flex;
@@ -43,7 +45,11 @@ const InfoText = styled.span`
     visibility 0.2s;
 `;
 
-function CardHelperInfo({ children }) {
+type CardHelperInfo = {
+  children: ReactNode;
+};
+
+function CardHelperInfo({ children }: CardHelperInfo) {
   return (
     <StyledHelperInfo>
       <InfoMark>

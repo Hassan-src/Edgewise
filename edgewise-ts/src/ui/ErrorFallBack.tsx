@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Heading from "./Heading";
 import GlobalStyles from "../styles/GlobalStyles";
 import Button from "./Buttons";
+import type { FallbackProps } from "react-error-boundary";
 
 const StyledErrorFallBack = styled.main`
   height: 100dvh;
@@ -36,14 +37,14 @@ const ButonBox = styled.div`
   justify-content: center;
 `;
 
-function ErrorFallBack({ error, resetErrorBoundary }) {
+function ErrorFallBack({ error, resetErrorBoundary }: FallbackProps) {
   return (
     <>
       <GlobalStyles />
       <StyledErrorFallBack>
         <Box>
           <Heading $as="h1">Somthing went wrong!</Heading>
-          <p>{error.message}</p>
+          <p>{error instanceof Error && error.message}</p>
           <ButonBox>
             <Button
               $variation="primary"

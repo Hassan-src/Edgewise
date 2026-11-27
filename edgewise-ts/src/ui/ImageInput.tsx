@@ -1,3 +1,4 @@
+import type { ChangeEvent } from "react";
 import { HiOutlineCamera } from "react-icons/hi2";
 import styled from "styled-components";
 
@@ -34,11 +35,15 @@ const ImageInputLable = styled.label`
   }
 `;
 
-function ImageInput({ onChange, disabled }) {
+type ImageInputProps = {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  disabled: boolean;
+};
+
+function ImageInput({ onChange, disabled }: ImageInputProps) {
   return (
     <>
       <StyledImageInput
-        type="file"
         id="avatar"
         accept="image/*"
         onChange={onChange}

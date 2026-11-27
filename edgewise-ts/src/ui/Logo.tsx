@@ -14,7 +14,13 @@ const StyledLogo = styled.div`
   justify-content: center;
 `;
 
-const Image = styled.img`
+type LogoType = "Header" | "LogIn" | "SideBar";
+
+type ImageProps = {
+  $type: LogoType;
+};
+
+const Image = styled.img<ImageProps>`
   ${(props) =>
     props.$type === "Header" &&
     css`
@@ -35,22 +41,29 @@ const Image = styled.img`
     `}
 `;
 
-function Logo({ $type = "SideBar" }) {
+type LogoProps = {
+  $type?: LogoType;
+};
+
+function Logo({ $type = "SideBar" }: LogoProps) {
   const { isDarkMode } = useAppMode();
   const logos = {
     Header: isDarkMode ? logoSymbolDark : logoSymbolLight,
     LogIn: isDarkMode ? imageVerticalDark : imageVertical,
   };
-
+  const src =
+    $type === "Header" ? logos.Header : $type === "LogIn" ? logos.LogIn : null;
   return (
     <StyledLogo>
       <Link to="/dashboard">
-        <Image
-          fetchPriority="high"
-          src={logos[$type]}
-          alt="Edgewise logo"
-          $type={$type}
-        />
+        {src !== null && (
+          <Image
+            fetchPriority="high"
+            src={src}
+            alt="Edgewise logo"
+            $type={$type}
+          />
+        )}
       </Link>
     </StyledLogo>
   );

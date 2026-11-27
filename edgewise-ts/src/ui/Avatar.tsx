@@ -13,17 +13,29 @@ const $type = {
   `,
 };
 
-const StyledAvatar = styled.img`
+type AvatarType = keyof typeof $type;
+
+type StyledAvatarProps = {
+  $type?: AvatarType;
+};
+
+const StyledAvatar = styled.img<StyledAvatarProps>`
   display: block;
   aspect-ratio: 1;
   object-fit: contain;
   object-position: center;
 
   border-radius: var(--radius-full);
-  ${(props) => $type[props.$type]}
+  ${(props) => props.$type && $type[props.$type]}
 `;
 
-function Avatar({ $type, src, alt }) {
+type AvatarProps = {
+  $type?: AvatarType;
+  src?: string;
+  alt?: string;
+};
+
+function Avatar({ $type, src, alt }: AvatarProps) {
   return (
     <StyledAvatar $type={$type} src={src || "default-user.svg"} alt={alt} />
   );
