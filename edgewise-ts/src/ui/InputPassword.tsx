@@ -34,7 +34,7 @@ const StyledInput = styled.input<StyledInputProps>`
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-1) var(--space-2);
-  ${(props) => $size[props.$size]}
+  ${(props) => props.$size && $size[props.$size]}
   &[value]:disabled {
     color: var(--color-text);
     opacity: 1;
@@ -60,12 +60,12 @@ type InputPasswordProps = Omit<
   "size" | "type"
 > & {
   type?: string;
-  $size: SizeType;
+  $size?: SizeType;
 };
 
 function InputPassword({
   type = "password",
-  $size,
+  $size = "medium",
   ...props
 }: InputPasswordProps) {
   const [showPassword, setShowPassword] = useState(false);

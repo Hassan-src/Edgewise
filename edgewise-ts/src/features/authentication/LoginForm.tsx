@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type SubmitEvent } from "react";
 import styled from "styled-components";
 
 import { useLogin } from "./useLogin";
@@ -54,14 +54,15 @@ function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const { login, isPending } = useLogin();
-  function handleSubmit(e) {
+  function handleSubmit(e: SubmitEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!email || !password) return;
     login(
       { email, password },
       {
         onSettled: () => {
-          (setEmail(""), setPassword(""));
+          setEmail("");
+          setPassword("");
         },
       },
     );
@@ -88,7 +89,7 @@ function LoginForm() {
           <InputPassword
             type="password"
             id="password"
-            autoComplete="corrent-password"
+            autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             disabled={isPending}

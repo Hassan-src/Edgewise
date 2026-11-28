@@ -14,7 +14,7 @@ export function useSignup() {
       } else {
         toast.success("Account created! Please verify your email.");
         navigate("/verify-email", {
-          state: { email: data.email },
+          state: { email: data.user?.email },
           replace: true,
         });
       }

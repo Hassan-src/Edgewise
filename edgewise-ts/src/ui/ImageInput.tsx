@@ -36,7 +36,7 @@ const ImageInputLable = styled.label`
 `;
 
 type ImageInputProps = {
-  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   disabled: boolean;
 };
 

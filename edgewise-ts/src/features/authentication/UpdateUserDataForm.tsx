@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import styled from "styled-components";
 
 import Form from "../../ui/Form";
@@ -32,27 +32,25 @@ const P = styled.p`
 `;
 
 function UpdateUserDataForm() {
-  const {
-    user: {
-      email,
-      user_metadata: { userName: currentUserName, avatar: currentAvatar },
-    },
-  } = useUser();
-
   const { updateUser, isUpdating } = useUpdateUser();
-
+  const { user } = useUser();
+  const [avatar, setAvatar] = useState<File | null>(null);
+  if (!user) return null;
+  const {
+    email,
+    user_metadata: { userName: currentUserName, avatar: currentAvatar },
+  } = user;
   const [userName, setUserName] = useState(currentUserName);
-  const [avatar, setAvatar] = useState(null);
-
-  function handelSubmit(e) {
+  function handelSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!userName) return;
+    const form = e.currentTarget;
     updateUser(
       { userName, avatar },
       {
         onSuccess: () => {
           setAvatar(null);
-          e.target.reset();
+          form.reset();
         },
       },
     );
@@ -81,7 +79,7 @@ function UpdateUserDataForm() {
               src={currentAvatar}
             />
             <ImageInput
-              onChange={(e) => setAvatar(e.target.files[0])}
+              onChange={(e) => setAvatar(e.target.files?.[0] ?? null)}
               disabled={isUpdating}
             />
           </ImageBox>

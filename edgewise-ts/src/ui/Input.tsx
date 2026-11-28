@@ -15,7 +15,7 @@ const $size = {
 type SizeType = keyof typeof $size;
 
 type InputProps = {
-  $size: SizeType;
+  $size?: SizeType;
 };
 
 const Input = styled.input<InputProps>`
@@ -25,7 +25,7 @@ const Input = styled.input<InputProps>`
   border: 2px solid var(--color-border);
   border-radius: var(--radius-sm);
   padding: var(--space-1) var(--space-2);
-  ${(props) => $size[props.$size]}
+  ${(props) => props.$size && $size[props.$size]}
   &[value]:disabled {
     color: var(--color-text);
     opacity: 1;

@@ -4,7 +4,6 @@ type FormProps = {
   $type?: "regular" | "modal";
 };
 
-
 const Form = styled.form<FormProps>`
   overflow: hidden;
   font-size: var(--text-xl);

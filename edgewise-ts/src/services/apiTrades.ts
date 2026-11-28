@@ -1,5 +1,28 @@
-import { PAGE_SIZE } from "../../../edgewise-js/src/utils/constants";
+import { PAGE_SIZE } from "../../../edgewise-ts/src/utils/constants";
+import type { Database } from "../types/database.types";
 import supabase from "./supabase";
+
+type TradeInsertType = Database["public"]["Tables"]["trades"]["Insert"];
+
+type TradeUpdateType = Database["public"]["Tables"]["trades"]["Update"];
+
+type FilterType = {
+  field: string;
+  value: string | number;
+};
+
+type SortType = {
+  field: string | "all";
+  direction: string | "all" | "asc" | "desc";
+};
+
+type GetTradesProps = {
+  page?: number;
+  filter?: FilterType;
+  profitSort?: SortType;
+  symbolSort?: SortType;
+  sideSort?: SortType;
+};
 
 export async function getTrades({
   page = 1,
@@ -7,7 +30,7 @@ export async function getTrades({
   sideSort,
   profitSort,
   symbolSort,
-} = {}) {
+}: GetTradesProps = {}) {
   const from = (page - 1) * PAGE_SIZE;
   const to = from + PAGE_SIZE - 1;
   let query = supabase
@@ -15,7 +38,8 @@ export async function getTrades({
     .select("*", { count: "exact" })
     .range(from, to);
   // Filter
-  if (filter !== null) query = query.eq(filter.field, filter.value);
+  if (filter?.field && filter.value !== undefined)
+    query = query.eq(filter.field, filter.value);
   // Sort
   if (
     profitSort &&
@@ -78,13 +102,22 @@ export async function getTradeSymbols() {
   ].sort();
 }
 
-export async function addEditTrade(newTrade, id) {
+type AddEditTradeProps =
+  | {
+      newTrade: TradeInsertType;
+      id?: undefined;
+    }
+  | {
+      newTrade: TradeUpdateType;
+      id: number;
+    };
+
+export async function addEditTrade({ newTrade, id }: AddEditTradeProps) {
   // 1.Add/Edit trade
-  let query = supabase.from("trades");
-  // A.Add
-  if (!id) query = query.insert([newTrade]);
-  // B.Edit
-  if (id) query = query.update(newTrade).eq("id", id);
+  const query =
+    id === undefined
+      ? supabase.from("trades").insert(newTrade)
+      : supabase.from("trades").update(newTrade).eq("id", id);
 
   const { data, error } = await query.select();
 
@@ -95,7 +128,11 @@ export async function addEditTrade(newTrade, id) {
   return data;
 }
 
-export async function addImportedTrades(trades) {
+type AddImportedTradesProps = {
+  trades: TradeInsertType[];
+};
+
+export async function addImportedTrades({ trades }: AddImportedTradesProps) {
   const { data, error } = await supabase.from("trades").insert(trades).select();
   if (error) {
     console.error(error);
@@ -104,7 +141,11 @@ export async function addImportedTrades(trades) {
   return data;
 }
 
-export async function deleteTrade(id) {
+type DeleteTradeProps = {
+  id: number;
+};
+
+export async function deleteTrade({ id }: DeleteTradeProps) {
   const { data, error } = await supabase.from("trades").delete().eq("id", id);
   if (error) {
     console.error(error);

@@ -49,13 +49,25 @@ const P = styled.p`
   text-align: center;
 `;
 
+type SignupFormValues = {
+  userName: string;
+  email: string;
+  password: string;
+  passwordConfirm: string;
+};
+
 function SignupForm() {
   const { signup, isPending: isSubmitting } = useSignup();
 
-  const { register, formState, getValues, handleSubmit, reset } = useForm();
-  const { errors } = formState;
-  function onSubmit({ userName, password, email }) {
-    signup({ userName, password, email }, { onSuccess: reset });
+  const {
+    register,
+    formState: { errors },
+    getValues,
+    handleSubmit,
+    reset,
+  } = useForm<SignupFormValues>();
+  function onSubmit({ userName, password, email }: SignupFormValues) {
+    signup({ userName, password, email }, { onSuccess: () => reset });
   }
   return (
     <StyledSignupForm>
@@ -131,7 +143,7 @@ function SignupForm() {
             })}
           />
         </FormRow>
-        <FormRow $gap="button" $type="action">
+        <FormRow $type="action">
           <Button $variation="primary" $size="large" disabled={isSubmitting}>
             Sign up
           </Button>

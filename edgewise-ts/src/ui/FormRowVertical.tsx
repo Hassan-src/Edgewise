@@ -26,6 +26,7 @@ type FormRowVerticalProps = {
   label?: string;
   error?: string;
   children: ReactElement<{ id?: string }>;
+  id?: string;
 };
 
 function FormRowVertical({ label, error, children }: FormRowVerticalProps) {
